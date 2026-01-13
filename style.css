@@ -1,0 +1,440 @@
+/* ==========================================
+   Waybar — Earthy Pop (Bright, Slightly Smaller)
+   Clay / Wheat / Sky / Moss / Rose + modern pills
+   ========================================== */
+
+* {
+  font-family: "JetBrains Mono", "Font Awesome 6 Free", "Font Awesome 6 Brands", sans-serif;
+  font-size: 14px;
+  min-height: 0;
+}
+
+/* ===== Palette (Gruvbox Dark Hard) ===== */
+@define-color bg rgba(40, 40, 40, 0.96);        /* bg0 (slightly lighter) */
+@define-color surface rgba(60, 56, 54, 0.96);   /* bg1 */
+@define-color surface2 rgba(80, 73, 69, 0.90);  /* bg2 */
+@define-color border rgba(102, 92, 84, 0.32);   /* bg3 */
+
+@define-color text rgba(235, 219, 178, 0.98);   /* fg1 */
+@define-color textDim rgba(213, 196, 161, 0.78);/* fg2 */
+
+/* Gruvbox accents */
+@define-color clay  #D65D0E;   /* orange */
+@define-color wheat #D79921;   /* yellow */
+@define-color sky   #458588;   /* blue */
+@define-color moss  #689D6A;   /* aqua */
+@define-color rose  #CC241D;   /* red */
+@define-color umber #504945;   /* bg2 */
+
+/* ===== Bar container ===== */
+window#waybar {
+  background: @bg;
+  color: @text;
+  border: 1px solid @border;
+  border-radius: 16px;
+}
+
+/* Remove underline hover behavior */
+button {
+  border: none;
+  border-radius: 999px;
+  box-shadow: none;
+  background: transparent;
+}
+button:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+/* ===== Module pill base ===== */
+#custom-appmenu,
+#workspaces,
+#submap,
+#window,
+#custom-media,
+#custom-spotify,
+#idle_inhibitor,
+#custom-audio,
+#custom-metrics,
+#pulseaudio,
+#pulseaudio-slider,
+#network,
+#bluetooth,
+#custom-updates,
+#custom-disk,
+#custom-vpn,
+#custom-mic,
+#custom-net,
+#custom-bluetooth,
+#custom-volmute,
+#power-profiles-daemon,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#keyboard-state,
+#battery,
+#clock,
+#tray,
+#custom-power {
+  background: @surface;
+  border: 1px solid @border;
+  border-radius: 999px;
+  padding: 6px 14px;
+  margin: 8px 6px;
+}
+
+/* Window title: quieter */
+#window {
+  background: @surface2;
+  color: @textDim;
+}
+
+/* ===== Apps button ===== */
+#custom-appmenu {
+  font-weight: 700;
+  background: rgba(102, 92, 84, 0.85);   /* darker umber */
+  border: 1px solid rgba(60, 56, 54, 0.98);
+  color: transparent;
+  background-image: url("/home/thigglez/.config/waybar/kirby-apps.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 55px 40px;
+  padding: 8px 20px;
+  min-width: 55px;
+  min-height: 40px;
+}
+#custom-appmenu:hover {
+  background: rgba(80, 73, 69, 0.92);
+}
+
+/* ===== Workspaces (clean, bright active) ===== */
+#workspaces { padding: 6px 10px; }
+
+#workspaces button {
+  padding: 6px 14px;
+  margin: 0 6px;
+  border-radius: 999px;
+  font-weight: 700;
+  color: @textDim;
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+#workspaces button:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+#workspaces button.active,
+#workspaces button.current {
+  color: @text;
+  background: rgba(214, 93, 14, 0.85);     /* clay */
+  border: 1px solid rgba(214, 93, 14, 0.99);
+}
+
+#workspaces button.urgent {
+  color: @text;
+  background: rgba(204, 36, 29, 0.85);       /* rose */
+  border: 1px solid rgba(204, 36, 29, 0.99);
+}
+
+/* ===== Submap ===== */
+#submap {
+  font-weight: 700;
+  background: rgba(214, 93, 14, 0.78);
+  border: 1px solid rgba(214, 93, 14, 0.98);
+}
+
+/* ===== Media ===== */
+#custom-media {
+  color: @textDim;
+}
+
+/* ===== Spotify ===== */
+#custom-spotify {
+  color: @textDim;
+  background-image: url("/home/thigglez/.cache/waybar/spotify-art");
+  background-repeat: no-repeat;
+  background-position: 8px center;
+  background-size: 30px 30px;
+  padding-left: 46px;
+}
+#custom-spotify.playing {
+  color: @text;
+}
+#custom-spotify.paused {
+  color: @textDim;
+}
+
+/* ===== Primary info modules: BRIGHT ===== */
+#network,
+#bluetooth,
+#custom-net,
+#custom-bluetooth {
+  background: rgba(69, 133, 136, 0.85);   /* sky */
+  border: 1px solid rgba(69, 133, 136, 0.99);
+  color: rgba(29, 32, 33, 0.98);
+  min-width: 170px;
+}
+
+#pulseaudio {
+  background: rgba(215, 153, 33, 0.65);   /* muted wheat */
+  border: 1px solid rgba(215, 153, 33, 0.85);
+  color: @text;
+}
+
+#custom-audio {
+  background: rgba(215, 153, 33, 0.86);   /* wheat */
+  border: 1px solid rgba(215, 153, 33, 1);
+  color: rgba(29, 32, 33, 0.98);
+  min-width: 36px;
+  min-height: 36px;
+  padding: 0;
+}
+
+#custom-volmute {
+  background: rgba(215, 153, 33, 0.65);   /* muted wheat */
+  border: 1px solid rgba(215, 153, 33, 0.85);
+  color: @text;
+}
+
+#pulseaudio.muted {
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid @border;
+  color: @textDim;
+}
+
+#custom-volmute.muted {
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid @border;
+  color: @textDim;
+}
+
+/* Audio drawer: base colors for child pills */
+#custom-mic {
+  background: rgba(215, 153, 33, 0.65);   /* muted wheat, more distinct */
+  border: 1px solid rgba(215, 153, 33, 0.85);
+  color: @text;
+}
+
+/* Audio drawer: unify child pills */
+#pulseaudio.audio-pill,
+#pulseaudio-slider.audio-pill,
+#custom-volmute.audio-pill,
+#custom-mic.audio-pill {
+  background: rgba(215, 153, 33, 0.65);   /* muted wheat, more distinct */
+  border: 1px solid rgba(215, 153, 33, 0.85);
+  color: @text;
+}
+
+/* ===== Pulseaudio slider ===== */
+#pulseaudio-slider {
+  background: rgba(215, 153, 33, 0.65); /* muted wheat */
+  border: 1px solid rgba(215, 153, 33, 0.85);
+  border-radius: 999px;
+  padding: 6px 12px;
+  margin: 8px 6px;
+}
+
+/* The track */
+#pulseaudio-slider trough {
+  min-height: 10px;
+  min-width: 120px;       /* increase if you want a longer slider */
+  border-radius: 999px;
+  background: rgba(29, 32, 33, 0.35);
+}
+
+/* The filled portion */
+#pulseaudio-slider highlight {
+  border-radius: 999px;
+  background: rgba(29, 32, 33, 0.85); /* dark fill for contrast */
+}
+
+/* The handle */
+#pulseaudio-slider slider {
+  min-height: 18px;
+  min-width: 18px;
+  border-radius: 999px;
+  background: rgba(29, 32, 33, 0.95);
+  border: 1px solid rgba(102, 92, 84, 0.35);
+  box-shadow: none;
+}
+
+
+#network.disconnected {
+  background: rgba(204, 36, 29, 0.85);
+  border: 1px solid rgba(204, 36, 29, 1);
+  color: @text;
+}
+
+#custom-vpn.on {
+  background: rgba(104, 157, 106, 0.85);   /* moss */
+  border: 1px solid rgba(104, 157, 106, 1);
+  color: rgba(29, 32, 33, 0.98);
+}
+
+#custom-bluetooth {
+  padding: 6px 14px;
+  min-width: 32px;
+}
+
+#custom-updates.warn {
+  background: rgba(204, 36, 29, 0.85);   /* rose */
+  border: 1px solid rgba(204, 36, 29, 1);
+  color: @text;
+}
+
+#custom-updates.ok,
+#custom-vpn.off,
+#custom-bluetooth.off,
+#custom-mic.off {
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid @border;
+  color: @textDim;
+}
+
+/* ===== Secondary metrics: still readable, less noisy ===== */
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#keyboard-state,
+#custom-metrics {
+  background: rgba(80, 73, 69, 0.55);     /* bg2 tint */
+  border: 1px solid rgba(80, 73, 69, 0.70);
+  color: @text;
+}
+
+#custom-metrics {
+  background: rgba(214, 93, 14, 0.85);   /* clay */
+  border: 1px solid rgba(214, 93, 14, 0.99);
+  color: rgba(29, 32, 33, 0.98);
+  min-width: 36px;
+  min-height: 36px;
+  padding: 0;
+}
+
+/* Metrics drawer: base colors for child pills */
+#idle_inhibitor,
+#power-profiles-daemon,
+#cpu,
+#memory,
+#temperature,
+#custom-disk,
+#network,
+#custom-net,
+#backlight,
+#keyboard-state {
+  background: rgba(214, 93, 14, 0.50);   /* muted clay */
+  border: 1px solid rgba(214, 93, 14, 0.70);
+  color: @text;
+}
+
+/* Metrics drawer: unify child pills */
+#idle_inhibitor.metrics-pill,
+#power-profiles-daemon.metrics-pill,
+#cpu.metrics-pill,
+#memory.metrics-pill,
+#temperature.metrics-pill,
+#custom-disk.metrics-pill,
+#network.metrics-pill,
+#custom-net.metrics-pill,
+#backlight.metrics-pill,
+#keyboard-state.metrics-pill {
+  background: rgba(214, 93, 14, 0.50);   /* muted clay */
+  border: 1px solid rgba(214, 93, 14, 0.70);
+  color: @text;
+}
+
+#temperature.critical {
+  background: rgba(204, 36, 29, 0.80);
+  border: 1px solid rgba(204, 36, 29, 1);
+  color: @text;
+}
+
+/* ===== Battery ===== */
+#battery {
+  background: rgba(80, 73, 69, 0.65);
+  border: 1px solid rgba(80, 73, 69, 0.90);
+  color: @text;
+}
+
+#battery.charging,
+#battery.plugged {
+  background: rgba(104, 157, 106, 0.85);   /* moss */
+  border: 1px solid rgba(104, 157, 106, 1);
+  color: rgba(29, 32, 33, 0.98);
+}
+
+#battery.critical:not(.charging) {
+  background: rgba(204, 36, 29, 0.85);
+  border: 1px solid rgba(204, 36, 29, 1);
+  color: @text;
+}
+
+/* ===== Clock ===== */
+#clock,
+#clock-time,
+#clock-date {
+  background: rgba(235, 219, 178, 0.20);
+  border: 1px solid rgba(235, 219, 178, 0.30);
+  color: @text;
+  font-weight: 700;
+}
+
+/* ===== Tray ===== */
+#tray {
+  background: rgba(235, 219, 178, 0.18);
+  border: 1px solid rgba(235, 219, 178, 0.26);
+}
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention {
+  background: rgba(204, 36, 29, 0.70);
+  border-radius: 999px;
+}
+
+/* ===== Power ===== */
+#custom-power {
+  font-weight: 800;
+  background: rgba(204, 36, 29, 0.60);
+  border: 1px solid rgba(204, 36, 29, 0.85);
+  padding: 6px 18px;
+  min-width: 48px;
+}
+#custom-power:hover {
+  background: rgba(204, 36, 29, 0.75);
+  border: 1px solid rgba(204, 36, 29, 0.98);
+}
+
+/* ===== Taskbar as “tabs” ===== */
+#taskbar {
+  background: rgba(60, 56, 54, 0.82);
+  border: 1px solid rgba(102, 92, 84, 0.30);
+  border-radius: 999px;
+  padding: 6px 10px;
+  margin: 8px 6px;
+}
+
+#taskbar button {
+  padding: 6px 12px;
+  margin: 0 6px;
+  border-radius: 999px;
+  background: rgba(235, 219, 178, 0.16);
+  border: 1px solid rgba(235, 219, 178, 0.20);
+  color: rgba(235, 219, 178, 0.92);
+}
+
+#taskbar button.active {
+  background: rgba(69, 133, 136, 0.72); /* sky */
+  border: 1px solid rgba(69, 133, 136, 0.98);
+  color: rgba(29, 32, 33, 0.98);
+}
+
+#taskbar button.minimized {
+  background: rgba(235, 219, 178, 0.12);
+  border: 1px solid rgba(235, 219, 178, 0.16);
+  color: rgba(235, 219, 178, 0.70);
+}
+
+/* ===== Edge spacing ===== */
+.modules-left > widget:first-child > * { margin-left: 48px; }
+.modules-right > widget:last-child > * { margin-right: 48px; }
