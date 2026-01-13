@@ -9,19 +9,18 @@
     // Choose the order of the modules
     "modules-left": [
         "custom/appmenu",
-        "hyprland/workspaces",
         "wlr/taskbar",
-        "group/audio",
-        "group/metrics",
+        "custom/spotify",
         "hyprland/submap"
     ],
     "modules-center": [
-        "hyprland/window"
+        "hyprland/workspaces"
     ],
     "modules-right": [
+        "hyprland/window",
         "custom/default-sink",
-        "mpd",
-        "custom/spotify",
+        "group/audio",
+        "group/metrics",
         "custom/bluetooth",
         "custom/vpn",
         "custom/updates",
@@ -49,6 +48,12 @@
 
     "hyprland/submap": {
         "format": "<span style=\"italic\">{}</span>"
+    },
+
+    "hyprland/window": {
+        "expand": true,
+        "justify": "left",
+        "align": 0
     },
 
     "mpd": {
@@ -206,7 +211,7 @@
             "children-class": "audio-pill",
             "click-to-reveal": true,
             "transition-duration": 250,
-            "transition-left-to-right": true
+            "transition-left-to-right": false
         },
         "modules": [
             "custom/audio",
@@ -228,7 +233,7 @@
             "children-class": "metrics-pill",
             "click-to-reveal": true,
             "transition-duration": 250,
-            "transition-left-to-right": true
+            "transition-left-to-right": false
         },
         "modules": [
             "custom/metrics",
