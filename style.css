@@ -25,6 +25,7 @@
 @define-color moss  #689D6A;   /* aqua */
 @define-color rose  #CC241D;   /* red */
 @define-color umber #504945;   /* bg2 */
+@define-color dusk  #B16286;   /* soft magenta */
 
 /* ===== Bar container ===== */
 window#waybar {
@@ -280,6 +281,30 @@ button:hover {
 }
 
 #custom-updates.warn {
+  background: rgba(204, 36, 29, 0.85);   /* rose */
+  border: 1px solid rgba(204, 36, 29, 1);
+  color: @text;
+}
+
+#custom-capture {
+  background: rgba(177, 98, 134, 0.85);   /* dusk */
+  border: 1px solid rgba(177, 98, 134, 0.98);
+  color: rgba(29, 32, 33, 0.98);
+  font-size: 16px;
+  min-width: 32px;
+  padding: 0 12px;
+}
+
+#custom-screenrecord,
+#custom-screenshot,
+#custom-screenrecord.capture-pill,
+#custom-screenshot.capture-pill {
+  background: rgba(177, 98, 134, 0.35);   /* muted dusk */
+  border: 1px solid rgba(177, 98, 134, 0.55);
+  color: @text;
+}
+
+#custom-screenrecord.capture-pill.recording {
   background: rgba(204, 36, 29, 0.85);   /* rose */
   border: 1px solid rgba(204, 36, 29, 1);
   color: @text;

@@ -21,6 +21,7 @@
         "custom/default-sink",
         "group/audio",
         "group/metrics",
+        "group/capture",
         "custom/bluetooth",
         "custom/vpn",
         "custom/updates",
@@ -307,6 +308,36 @@
         "interval": 5,
         "exec": "$HOME/.config/waybar/scripts/bluetooth.sh",
         "on-click": "blueman-manager"
+    },
+    "custom/screenrecord": {
+        "return-type": "json",
+        "interval": 1,
+        "exec": "$HOME/.config/waybar/scripts/screen_record.sh",
+        "on-click": "$HOME/.config/waybar/scripts/screen_record_toggle.sh"
+    },
+    "custom/screenshot": {
+        "return-type": "json",
+        "interval": 3600,
+        "exec": "$HOME/.config/waybar/scripts/screenshot.sh",
+        "on-click": "$HOME/.config/waybar/scripts/screenshot_take.sh"
+    },
+    "group/capture": {
+        "orientation": "horizontal",
+        "drawer": {
+            "children-class": "capture-pill",
+            "click-to-reveal": true,
+            "transition-duration": 250,
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "custom/capture",
+            "custom/screenrecord",
+            "custom/screenshot"
+        ]
+    },
+    "custom/capture": {
+        "format": "",
+        "tooltip": "Capture"
     },
 
     "custom/default-sink": {
