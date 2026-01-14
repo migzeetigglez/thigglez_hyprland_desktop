@@ -48,6 +48,11 @@
     "hyprland/submap": {
         "format": "<span style=\"italic\">{}</span>"
     },
+    "hyprland/workspaces": {
+        "persistent-workspaces": {
+            "*": 1
+        }
+    },
 
     "hyprland/window": {
         "expand": true,
