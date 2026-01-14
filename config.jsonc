@@ -238,6 +238,7 @@
         },
         "modules": [
             "custom/metrics",
+            "custom/sysmon",
             "idle_inhibitor",
             "power-profiles-daemon",
             "cpu",
@@ -252,6 +253,11 @@
     "custom/metrics": {
         "format": "",
         "tooltip": "System"
+    },
+    "custom/sysmon": {
+        "format": "",
+        "tooltip": "System Monitor",
+        "on-click": "plasma-systemmonitor"
     },
 
     "custom/spotify": {

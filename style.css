@@ -319,6 +319,7 @@ button:hover {
 /* Metrics drawer: base colors for child pills */
 #idle_inhibitor,
 #power-profiles-daemon,
+#custom-sysmon,
 #cpu,
 #memory,
 #temperature,
@@ -335,6 +336,7 @@ button:hover {
 /* Metrics drawer: unify child pills */
 #idle_inhibitor.metrics-pill,
 #power-profiles-daemon.metrics-pill,
+#custom-sysmon.metrics-pill,
 #cpu.metrics-pill,
 #memory.metrics-pill,
 #temperature.metrics-pill,
