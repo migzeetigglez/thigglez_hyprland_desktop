@@ -10,7 +10,7 @@
 }
 
 /* ===== Palette (Gruvbox Dark Hard) ===== */
-@define-color bg rgba(40, 40, 40, 0.96);        /* bg0 (slightly lighter) */
+@define-color bg rgba(62, 96, 122, 0.995);      /* muted darker pastel blue */
 @define-color surface rgba(60, 56, 54, 0.96);   /* bg1 */
 @define-color surface2 rgba(80, 73, 69, 0.90);  /* bg2 */
 @define-color border rgba(102, 92, 84, 0.32);   /* bg3 */
@@ -47,41 +47,13 @@ button:hover {
 }
 
 /* ===== Module pill base ===== */
-#custom-appmenu,
-#workspaces,
-#submap,
-#window,
-#custom-media,
-#custom-spotify,
-#idle_inhibitor,
-#custom-audio,
-#custom-metrics,
-#pulseaudio,
-#pulseaudio-slider,
-#network,
-#bluetooth,
-#custom-updates,
-#custom-disk,
-#custom-vpn,
-#custom-mic,
-#custom-net,
-#custom-bluetooth,
-#custom-volmute,
-#power-profiles-daemon,
-#cpu,
-#memory,
-#temperature,
-#backlight,
-#keyboard-state,
-#battery,
-#clock,
-#tray,
-#custom-power {
+.module {
   background: @surface;
   border: 1px solid @border;
   border-radius: 999px;
-  padding: 6px 14px;
+  padding: 6px 12px;
   margin: 8px 6px;
+  min-height: 32px;
 }
 
 /* Window title: quieter */
@@ -93,19 +65,20 @@ button:hover {
 /* ===== Apps button ===== */
 #custom-appmenu {
   font-weight: 700;
-  background: rgba(102, 92, 84, 0.85);   /* darker umber */
-  border: 1px solid rgba(60, 56, 54, 0.98);
+  background: transparent;
+  border: none;
   color: transparent;
   background-image: url("/home/thigglez/.config/waybar/kirby-apps.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 55px 40px;
-  padding: 8px 20px;
-  min-width: 55px;
-  min-height: 40px;
+  background-size: 62px 34px;
+  padding: 0;
+  min-width: 72px;
+  min-height: 34px;
+  margin: 6px 10px;
 }
 #custom-appmenu:hover {
-  background: rgba(80, 73, 69, 0.92);
+  background-color: rgba(255, 255, 255, 0.10);
 }
 
 /* ===== Workspaces (clean, bright active) ===== */
@@ -187,9 +160,8 @@ button:hover {
   background: rgba(215, 153, 33, 0.86);   /* wheat */
   border: 1px solid rgba(215, 153, 33, 1);
   color: rgba(29, 32, 33, 0.98);
-  min-width: 54px;
-  min-height: 36px;
-  padding: 0;
+  min-width: 32px;
+  padding: 0 12px;
 }
 
 #custom-volmute {
@@ -274,10 +246,9 @@ button:hover {
 }
 
 #custom-bluetooth {
-  font-size: 36px;
-  padding: 0 8px;
-  min-width: 43px;
-  min-height: 36px;
+  font-size: 16px;
+  min-width: 32px;
+  padding: 0 12px;
 }
 
 #custom-updates.warn {
@@ -340,10 +311,9 @@ button:hover {
   background: rgba(214, 93, 14, 0.85);   /* clay */
   border: 1px solid rgba(214, 93, 14, 0.99);
   color: rgba(29, 32, 33, 0.98);
-  font-size: 21px;
-  min-width: 54px;
-  min-height: 54px;
-  padding: 0;
+  font-size: 16px;
+  min-width: 32px;
+  padding: 0 12px;
 }
 
 /* Metrics drawer: base colors for child pills */
@@ -430,10 +400,9 @@ button:hover {
   font-weight: 800;
   background: rgba(204, 36, 29, 0.60);
   border: 1px solid rgba(204, 36, 29, 0.85);
-  font-size: 36px;
-  padding: 0;
-  min-width: 36px;
-  min-height: 36px;
+  font-size: 18px;
+  min-width: 32px;
+  padding: 0 12px;
 }
 #custom-power:hover {
   background: rgba(204, 36, 29, 0.75);
