@@ -1,8 +1,31 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if ! command -v wpctl >/dev/null 2>&1; then
+if ! command -v wpctl >/dev/null 2>&1 && ! command -v pactl >/dev/null 2>&1; then
   exit 0
+fi
+
+if command -v pactl >/dev/null 2>&1; then
+  running_sink_id=$(pactl list short sink-inputs 2>/dev/null | awk '
+    $5 == "RUNNING" {print $2; exit}
+  ')
+  if [ -z "$running_sink_id" ]; then
+    running_sink_id=$(pactl list sink-inputs 2>/dev/null | awk -v RS='' '
+      /Corked: no/ {
+        for (i = 1; i <= NF; i++) {
+          if ($i == "Sink:") {print $(i+1); exit}
+        }
+      }
+    ')
+  fi
+  if [ -n "$running_sink_id" ]; then
+    running_sink_name=$(pactl list short sinks 2>/dev/null | awk -v id="$running_sink_id" '$1 == id {print $2; exit}')
+    current_sink=$(pactl info 2>/dev/null | awk -F': ' '/Default Sink/ {print $2; exit}')
+    if [ -n "$running_sink_name" ] && [ "$running_sink_name" != "$current_sink" ]; then
+      pactl set-default-sink "$running_sink_name" >/dev/null 2>&1 || true
+    fi
+    exit 0
+  fi
 fi
 
 status=$(wpctl status 2>/dev/null || true)
@@ -11,9 +34,9 @@ if [ -z "$status" ]; then
 fi
 
 sinks=$(printf '%s\n' "$status" | awk '
-  /Sinks:/ {in=1; next}
-  /Sources:/ {in=0}
-  in {print}
+  /Sinks:/ {in_section=1; next}
+  /Sources:/ {in_section=0}
+  in_section {print}
 ')
 
 if [ -z "$sinks" ]; then
@@ -21,9 +44,9 @@ if [ -z "$sinks" ]; then
 fi
 
 streams=$(printf '%s\n' "$status" | awk '
-  /Streams:/ {in=1; next}
-  /Video/ {in=0}
-  in {print}
+  /Streams:/ {in_section=1; next}
+  /Video/ {in_section=0}
+  in_section {print}
 ')
 
 current_id=$(printf '%s\n' "$sinks" | awk '

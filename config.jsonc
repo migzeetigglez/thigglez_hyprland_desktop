@@ -342,7 +342,7 @@
 
     "custom/default-sink": {
         "exec": "$HOME/.config/waybar/scripts/default_sink.sh",
-        "interval": 5,
+        "interval": 2,
         "hide-empty-text": true,
         "tooltip": false
     },
