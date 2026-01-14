@@ -5,10 +5,17 @@ Personal Hyprland + Waybar configuration with custom media widgets, drawer group
 
 ## Preview
 ![Full desktop](full-desktop.png)
+Full desktop: overall layout, pill system, and muted pastel bar theme.
 ![Waybar overview](waybar.png)
+Waybar overview: active workspaces, media, and system status at a glance.
 ![App picker](app-picker.png)
+App picker: Wofi launcher with the custom prompt styling and theming.
 ![Audio drawer](audio-drawer.png)
+Audio drawer: quick access to output, volume slider, mute, and mic controls.
 ![System drawer](system-drawer.png)
+System drawer: power/metrics tray with CPU, memory, temperature, and toggles.
+![Kitty + Fish](kitty-fish.png)
+Terminal: Kitty paired with Fish shell prompt styling and matching theme.
 
 ## What's inside
 - Waybar config and styling (uniform pill system + themed bar)
