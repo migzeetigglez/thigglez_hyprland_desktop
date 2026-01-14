@@ -10,22 +10,22 @@
 }
 
 /* ===== Palette (Gruvbox Dark Hard) ===== */
-@define-color bg rgba(62, 96, 122, 0.995);      /* muted darker pastel blue */
-@define-color surface rgba(60, 56, 54, 0.96);   /* bg1 */
-@define-color surface2 rgba(80, 73, 69, 0.90);  /* bg2 */
-@define-color border rgba(102, 92, 84, 0.32);   /* bg3 */
+@define-color bg rgba(90, 130, 158, 0.985);      /* brighter pastel blue */
+@define-color surface rgba(88, 84, 81, 0.93);    /* lighter bg1 */
+@define-color surface2 rgba(108, 101, 96, 0.86); /* lighter bg2 */
+@define-color border rgba(132, 123, 116, 0.28);  /* softer border */
 
-@define-color text rgba(235, 219, 178, 0.98);   /* fg1 */
-@define-color textDim rgba(213, 196, 161, 0.78);/* fg2 */
+@define-color text rgba(244, 232, 202, 0.99);     /* brighter fg1 */
+@define-color textDim rgba(224, 211, 180, 0.86);  /* brighter fg2 */
 
 /* Gruvbox accents */
-@define-color clay  #D65D0E;   /* orange */
-@define-color wheat #D79921;   /* yellow */
-@define-color sky   #458588;   /* blue */
-@define-color moss  #689D6A;   /* aqua */
-@define-color rose  #CC241D;   /* red */
-@define-color umber #504945;   /* bg2 */
-@define-color dusk  #B16286;   /* soft magenta */
+@define-color clay  #DA772F;   /* brighter orange */
+@define-color wheat #D8AC44;   /* brighter yellow */
+@define-color sky   #5D9EAA;   /* brighter blue */
+@define-color moss  #7AB77B;   /* brighter aqua */
+@define-color rose  #DA483E;   /* brighter red */
+@define-color umber #6E635C;   /* lighter bg2 */
+@define-color dusk  #C47BA1;   /* brighter magenta */
 
 /* ===== Bar container ===== */
 window#waybar {
@@ -78,7 +78,7 @@ button:hover {
   border: 1px solid rgba(255, 255, 255, 0.20);
   border-radius: 16px;
   color: transparent;
-  background-image: url("/home/thigglez/.config/waybar/kirby-apps.png");
+  background-image: url("kirby-apps.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 62px 34px;
@@ -156,7 +156,6 @@ button:hover {
 
 /* ===== Primary info modules: BRIGHT ===== */
 #network,
-#bluetooth,
 #custom-net,
 #custom-bluetooth {
   background: rgba(69, 133, 136, 0.85);   /* sky */
@@ -172,8 +171,8 @@ button:hover {
 }
 
 #custom-audio {
-  background: rgba(215, 153, 33, 0.86);   /* wheat */
-  border: 1px solid rgba(215, 153, 33, 1);
+  background: rgba(240, 194, 76, 0.92);   /* brighter wheat */
+  border: 1px solid rgba(240, 194, 76, 1);
   color: rgba(29, 32, 33, 0.98);
   min-width: 32px;
   padding: 0 12px;
@@ -283,8 +282,8 @@ button:hover {
 }
 
 #custom-settings {
-  background: rgba(69, 133, 136, 0.85);   /* sky */
-  border: 1px solid rgba(69, 133, 136, 0.99);
+  background: rgba(108, 176, 187, 0.92);   /* brighter sky */
+  border: 1px solid rgba(108, 176, 187, 1);
   color: rgba(29, 32, 33, 0.98);
   font-size: 16px;
   min-width: 32px;
@@ -299,8 +298,8 @@ button:hover {
 }
 
 #custom-capture {
-  background: rgba(177, 98, 134, 0.85);   /* dusk */
-  border: 1px solid rgba(177, 98, 134, 0.98);
+  background: rgba(214, 140, 178, 0.92);   /* brighter dusk */
+  border: 1px solid rgba(214, 140, 178, 1);
   color: rgba(29, 32, 33, 0.98);
   font-size: 16px;
   min-width: 32px;
@@ -354,8 +353,8 @@ button:hover {
 }
 
 #custom-metrics {
-  background: rgba(214, 93, 14, 0.85);   /* clay */
-  border: 1px solid rgba(214, 93, 14, 0.99);
+  background: rgba(240, 138, 60, 0.92);   /* brighter clay */
+  border: 1px solid rgba(240, 138, 60, 1);
   color: rgba(29, 32, 33, 0.98);
   font-size: 16px;
   min-width: 32px;
@@ -463,8 +462,7 @@ button:hover {
 
 /* ===== Clock ===== */
 #clock,
-#clock-time,
-#clock-date {
+#clock-time {
   background: rgba(0, 0, 0, 0.35);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 16px;
@@ -552,3 +550,8 @@ button:hover {
 /* ===== Edge spacing ===== */
 .modules-left > widget:first-child { margin-left: 48px; }
 .modules-right > widget:last-child { margin-right: 48px; }
+
+/* Right side: slightly more opaque for dark wallpapers */
+.modules-right .module {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0.26));
+}
