@@ -32,7 +32,7 @@ window#waybar {
   background: @bg;
   color: @text;
   border: 1px solid @border;
-  border-radius: 16px;
+  border-radius: 0;
 }
 
 /* Remove underline hover behavior */
@@ -50,10 +50,10 @@ button:hover {
 .module {
   background: @surface;
   border: 1px solid @border;
-  border-radius: 999px;
-  padding: 6px 12px;
-  margin: 8px 6px;
-  min-height: 32px;
+  border-radius: 16px;
+  padding: 5px 10px;
+  margin: 6px 6px;
+  min-height: 28px;
 }
 
 /* Window title: quieter */
@@ -74,8 +74,8 @@ button:hover {
   background-size: 62px 34px;
   padding: 0;
   min-width: 72px;
-  min-height: 34px;
-  margin: 6px 10px;
+  min-height: 32px;
+  margin: 6px 8px;
 }
 #custom-appmenu:hover {
   background-color: rgba(255, 255, 255, 0.10);
@@ -85,9 +85,9 @@ button:hover {
 #workspaces { padding: 6px 10px; }
 
 #workspaces button {
-  padding: 6px 14px;
-  margin: 0 6px;
-  border-radius: 999px;
+  padding: 5px 12px;
+  margin: 0 5px;
+  border-radius: 16px;
   font-weight: 700;
   color: @textDim;
   background: transparent;
@@ -203,30 +203,30 @@ button:hover {
 #pulseaudio-slider {
   background: rgba(215, 153, 33, 0.65); /* muted wheat */
   border: 1px solid rgba(215, 153, 33, 0.85);
-  border-radius: 999px;
-  padding: 6px 12px;
-  margin: 8px 6px;
+  border-radius: 16px;
+  padding: 5px 10px;
+  margin: 6px 6px;
 }
 
 /* The track */
 #pulseaudio-slider trough {
-  min-height: 10px;
+  min-height: 8px;
   min-width: 120px;       /* increase if you want a longer slider */
-  border-radius: 999px;
+  border-radius: 16px;
   background: rgba(29, 32, 33, 0.35);
 }
 
 /* The filled portion */
 #pulseaudio-slider highlight {
-  border-radius: 999px;
+  border-radius: 16px;
   background: rgba(29, 32, 33, 0.85); /* dark fill for contrast */
 }
 
 /* The handle */
 #pulseaudio-slider slider {
-  min-height: 18px;
-  min-width: 18px;
-  border-radius: 999px;
+  min-height: 16px;
+  min-width: 16px;
+  border-radius: 16px;
   background: rgba(29, 32, 33, 0.95);
   border: 1px solid rgba(102, 92, 84, 0.35);
   box-shadow: none;
@@ -246,6 +246,15 @@ button:hover {
 }
 
 #custom-bluetooth {
+  font-size: 16px;
+  min-width: 32px;
+  padding: 0 12px;
+}
+
+#custom-settings {
+  background: rgba(69, 133, 136, 0.85);   /* sky */
+  border: 1px solid rgba(69, 133, 136, 0.99);
+  color: rgba(29, 32, 33, 0.98);
   font-size: 16px;
   min-width: 32px;
   padding: 0 12px;
@@ -354,6 +363,25 @@ button:hover {
   color: @text;
 }
 
+/* Settings drawer: unify child pills */
+#custom-vpn.settings-pill,
+#custom-vpn.on.settings-pill,
+#custom-vpn.off.settings-pill,
+#custom-bluetooth.settings-pill,
+#custom-bluetooth.off.settings-pill,
+#custom-sysmon.settings-pill,
+#idle_inhibitor.settings-pill,
+#power-profiles-daemon.settings-pill,
+.settings-pill #custom-vpn,
+.settings-pill #custom-bluetooth,
+.settings-pill #custom-sysmon,
+.settings-pill #idle_inhibitor,
+.settings-pill #power-profiles-daemon {
+  background: rgba(69, 133, 136, 0.45);   /* muted sky */
+  border: 1px solid rgba(69, 133, 136, 0.70);
+  color: @text;
+}
+
 #temperature.critical {
   background: rgba(204, 36, 29, 0.80);
   border: 1px solid rgba(204, 36, 29, 1);
@@ -384,22 +412,34 @@ button:hover {
 #clock,
 #clock-time,
 #clock-date {
-  background: rgba(235, 219, 178, 0.20);
-  border: 1px solid rgba(235, 219, 178, 0.30);
+  background: transparent;
+  border: none;
+  border-radius: 0;
   color: @text;
   font-weight: 700;
+  font-family: "JetBrains Mono", "Font Awesome 6 Free", "Font Awesome 6 Brands", monospace;
+  padding: 0 8px;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 6px rgba(235, 219, 178, 0.28);
 }
 
 /* ===== Tray ===== */
 #tray {
-  background: rgba(235, 219, 178, 0.18);
-  border: 1px solid rgba(235, 219, 178, 0.26);
+  background: rgba(60, 56, 54, 0.82);
+  border: 1px solid rgba(102, 92, 84, 0.30);
+  border-right: none;
+  border-radius: 16px 0 0 16px;
+  padding: 5px 8px;
+  margin: 6px 0 6px 6px;
+  min-height: 0;
 }
 #tray > .passive { -gtk-icon-effect: dim; }
 #tray > .needs-attention {
   background: rgba(204, 36, 29, 0.70);
   border-radius: 999px;
 }
+
 
 /* ===== Power ===== */
 #custom-power {
@@ -419,15 +459,16 @@ button:hover {
 #taskbar {
   background: rgba(60, 56, 54, 0.82);
   border: 1px solid rgba(102, 92, 84, 0.30);
-  border-radius: 999px;
-  padding: 6px 10px;
-  margin: 8px 6px;
+  border-left: none;
+  border-radius: 0 16px 16px 0;
+  padding: 5px 8px;
+  margin: 6px 6px 6px 0;
 }
 
 #taskbar button {
-  padding: 6px 12px;
-  margin: 0 6px;
-  border-radius: 999px;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 16px;
   background: rgba(235, 219, 178, 0.16);
   border: 1px solid rgba(235, 219, 178, 0.20);
   color: rgba(235, 219, 178, 0.92);
@@ -446,5 +487,5 @@ button:hover {
 }
 
 /* ===== Edge spacing ===== */
-.modules-left > widget:first-child > * { margin-left: 48px; }
-.modules-right > widget:last-child > * { margin-right: 48px; }
+.modules-left > widget:first-child { margin-left: 48px; }
+.modules-right > widget:last-child { margin-right: 48px; }
