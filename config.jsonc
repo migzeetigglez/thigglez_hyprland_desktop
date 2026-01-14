@@ -9,6 +9,7 @@
     // Choose the order of the modules
     "modules-left": [
         "custom/appmenu",
+        "tray",
         "wlr/taskbar",
         "custom/spotify",
         "hyprland/submap"
@@ -19,19 +20,16 @@
     "modules-right": [
         "hyprland/window",
         "custom/default-sink",
+        "group/capture",
         "group/audio",
         "group/metrics",
-        "group/capture",
-        "custom/bluetooth",
-        "custom/vpn",
+        "group/settings",
         "custom/updates",
         "backlight",
         "keyboard-state",
         "battery",
         "battery#bat2",
         "clock#time",
-        "clock#date",
-        "tray",
         "custom/power"
     ],
 
@@ -104,11 +102,7 @@
     "clock#time": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%I:%M %p}",
-        "format-alt": "{:%Y-%m-%d}"
-    },
-    "clock#date": {
-        "format": "{:%a, %b %d}"
+        "format": "{:%I:%M %p}"
     },
 
     "cpu": {
@@ -238,9 +232,6 @@
         },
         "modules": [
             "custom/metrics",
-            "custom/sysmon",
-            "idle_inhibitor",
-            "power-profiles-daemon",
             "cpu",
             "memory",
             "temperature",
@@ -253,6 +244,27 @@
     "custom/metrics": {
         "format": "",
         "tooltip": "System"
+    },
+    "group/settings": {
+        "orientation": "horizontal",
+        "drawer": {
+            "children-class": "settings-pill",
+            "click-to-reveal": true,
+            "transition-duration": 250,
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "custom/settings",
+            "custom/vpn",
+            "custom/bluetooth",
+            "custom/sysmon",
+            "idle_inhibitor",
+            "power-profiles-daemon"
+        ]
+    },
+    "custom/settings": {
+        "format": "",
+        "tooltip": "Settings"
     },
     "custom/sysmon": {
         "format": "",
