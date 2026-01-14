@@ -338,12 +338,24 @@
         "modules": [
             "custom/capture",
             "custom/screenrecord",
-            "custom/screenshot"
+            "custom/screenshot",
+            "custom/recordings-dir",
+            "custom/screenshots-dir"
         ]
     },
     "custom/capture": {
         "format": "",
         "tooltip": "Capture"
+    },
+    "custom/recordings-dir": {
+        "format": " ",
+        "tooltip": "Open recordings folder",
+        "on-click": "thunar $HOME/Videos/recordings"
+    },
+    "custom/screenshots-dir": {
+        "format": " ",
+        "tooltip": "Open screenshots folder",
+        "on-click": "thunar $HOME/Pictures/Screenshots"
     },
 
     "custom/default-sink": {

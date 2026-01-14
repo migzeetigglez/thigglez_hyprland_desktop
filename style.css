@@ -268,8 +268,12 @@ button:hover {
 
 #custom-screenrecord,
 #custom-screenshot,
+#custom-recordings-dir,
+#custom-screenshots-dir,
 #custom-screenrecord.capture-pill,
-#custom-screenshot.capture-pill {
+#custom-screenshot.capture-pill,
+#custom-recordings-dir.capture-pill,
+#custom-screenshots-dir.capture-pill {
   background: rgba(177, 98, 134, 0.35);   /* muted dusk */
   border: 1px solid rgba(177, 98, 134, 0.55);
   color: @text;
