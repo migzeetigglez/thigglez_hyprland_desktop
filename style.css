@@ -44,7 +44,7 @@ button {
   transition: background-color 160ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 160ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 button:hover {
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(204, 36, 29, 0.60);
 }
 
 /* ===== Module pill base ===== */
@@ -76,22 +76,22 @@ button:hover {
 #custom-appmenu {
   font-weight: 700;
   background: rgba(255, 255, 255, 0.10);
-  border: 1px solid rgba(255, 255, 255, 0.20);
+  border: 1px solid rgba(204, 36, 29, 0.85);
   border-radius: 16px;
   color: transparent;
-  background-image: url("kirby-apps.png");
+  background-image: url("leo-picker.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 62px 34px;
-  padding: 0;
-  min-width: 72px;
-  min-height: 32px;
+  background-size: 34px 38px;
+  padding: 0 20px;
+  min-width: 34px;
+  min-height: 38px;
   margin: 6px 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
 }
 #custom-appmenu:hover {
-  background-color: rgba(255, 255, 255, 0.18);
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  background-color: rgba(204, 36, 29, 0.75);
+  border: 1px solid rgba(204, 36, 29, 0.98);
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.38);
 }
 
@@ -177,6 +177,10 @@ button:hover {
   color: rgba(29, 32, 33, 0.98);
   min-width: 32px;
   padding: 0 12px;
+}
+#custom-audio:hover {
+  background: rgba(240, 194, 76, 0.98);
+  border: 1px solid rgba(240, 194, 76, 1);
 }
 
 #custom-volmute {
@@ -290,6 +294,10 @@ button:hover {
   min-width: 32px;
   padding: 0 12px;
 }
+#custom-settings:hover {
+  background: rgba(108, 176, 187, 0.98);
+  border: 1px solid rgba(108, 176, 187, 1);
+}
 
 #custom-updates.warn {
   background: rgba(204, 36, 29, 0.85);   /* rose */
@@ -305,6 +313,10 @@ button:hover {
   font-size: 16px;
   min-width: 32px;
   padding: 0 12px;
+}
+#custom-capture:hover {
+  background: rgba(214, 140, 178, 0.98);
+  border: 1px solid rgba(214, 140, 178, 1);
 }
 
 #custom-screenrecord,
@@ -360,6 +372,10 @@ button:hover {
   font-size: 16px;
   min-width: 32px;
   padding: 0 12px;
+}
+#custom-metrics:hover {
+  background: rgba(240, 138, 60, 0.98);
+  border: 1px solid rgba(240, 138, 60, 1);
 }
 
 /* Single-icon pills: normalize size/alignment */
