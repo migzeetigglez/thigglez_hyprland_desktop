@@ -4,11 +4,11 @@
 (defpoll time_str :interval "10s"
   `date '+%I:%M %p'`)
 
-(defpoll media :interval "1s"
-  `~/.config/eww/scripts/media_now.py`)
+(defpoll media :interval "1s" :initial "{}"
+  `sh -c 'out="$(~/.config/eww/scripts/media_now.py 2>/dev/null)"; if [ -n "$out" ]; then echo "$out"; else echo "{}"; fi'`)
 
-(defpoll notifications :interval "5s"
-  `~/.config/eww/scripts/notifications_for_eww.py`)
+(defpoll notifications :interval "5s" :initial "[]"
+  `sh -c 'out="$(~/.config/eww/scripts/notifications_for_eww.py 2>/dev/null)"; if [ -n "$out" ]; then echo "$out"; else echo "[]"; fi'`)
 
 (defvar notif_panel_class "open")
 
@@ -65,7 +65,7 @@
   (box :class "popup-body" :orientation "vertical" :space-evenly false
     (popup_header :title "Now Playing" :subtitle time_str)
     (box :class "media-row" :orientation "horizontal" :space-evenly false
-      (image :class "media-art" :path "${media.art_path}" :image-width 64 :image-height 64 :preserve-aspect-ratio true)
+      (image :class "media-art" :path "${media.art_path}" :image-width 64 :image-height 64)
       (box :class "media-text" :orientation "vertical" :space-evenly false
         (label :class "media-title" :text "${media.title}")
         (label :class "media-artist" :text "${media.artist}")

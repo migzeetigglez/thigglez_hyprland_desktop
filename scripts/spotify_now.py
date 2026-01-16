@@ -31,8 +31,21 @@ def select_player():
     if not players:
         return None, None
 
+    preferred = [
+        "spotify",
+        "com.spotify.Client",
+        "spotify-player",
+    ]
+    candidates = []
+    for player in players:
+        lower = player.lower()
+        if any(key in lower for key in preferred):
+            candidates.append(player)
+    if not candidates:
+        return None, None
+
     for status in ("Playing", "Paused"):
-        for player in players:
+        for player in candidates:
             st = player_status(player)
             if st == status:
                 return player, st
@@ -170,4 +183,4 @@ if __name__ == "__main__":
     try:
         main()
     except Exception:
-        pass
+        sys.stdout.write(json.dumps({"text": ""}))
