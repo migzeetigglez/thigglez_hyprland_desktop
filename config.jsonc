@@ -40,6 +40,7 @@
         "numlock": true,
         "capslock": true,
         "on-click": "/usr/bin/python3 /home/thigglez/.config/eww/scripts/open_popup_at_cursor.py calendar_popup 360 42 primary",
+        "tooltip": false,
         "format": "{name} {icon}",
         "format-icons": {
             "locked": "",
@@ -81,7 +82,7 @@
 
     "clock#time": {
         // "timezone": "America/New_York",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "tooltip": false,
         "on-click": "/usr/bin/python3 /home/thigglez/.config/eww/scripts/open_popup_at_cursor.py calendar_popup 360 42 primary",
         "format": "{:%I:%M %p}"
     },
@@ -92,7 +93,8 @@
     },
 
     "memory": {
-        "format": "{}% "
+        "format": "{}% ",
+        "tooltip": false
     },
 
     "temperature": {
@@ -101,13 +103,15 @@
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
+        "format-icons": ["", "", ""],
+        "tooltip": false
     },
 
     "backlight": {
         // "device": "acpi_video1",
         "format": "{percent}% {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
+        "tooltip": false
     },
 
     "battery": {
@@ -123,17 +127,18 @@
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": ["", "", "", "", ""],
+        "tooltip": false
     },
 
     "battery#bat2": {
-        "bat": "BAT2"
+        "bat": "BAT2",
+        "tooltip": false
     },
 
     "power-profiles-daemon": {
       "format": "{icon}",
-      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-      "tooltip": true,
+      "tooltip": false,
       "format-icons": {
         "default": "",
         "performance": "",
@@ -146,7 +151,7 @@
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
         "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
+        "tooltip": false,
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
@@ -172,6 +177,7 @@
             "car": "",
             "default": ["", "", ""]
         },
+        "tooltip": false,
         "on-click": "pavucontrol"
     },
 
@@ -200,7 +206,7 @@
 
     "custom/audio": {
         "format": "",
-        "tooltip": "Audio"
+        "tooltip": false
     },
 
     "group/metrics": {
@@ -224,7 +230,7 @@
 
     "custom/metrics": {
         "format": "",
-        "tooltip": "System"
+        "tooltip": false
     },
     "group/settings": {
         "orientation": "horizontal",
@@ -245,16 +251,16 @@
     },
     "custom/settings": {
         "format": "",
-        "tooltip": "Settings"
+        "tooltip": false
     },
     "custom/notifications": {
         "format": "",
-        "tooltip": "Notification history",
+        "tooltip": false,
         "on-click": "/home/thigglez/.config/eww/scripts/toggle_notifications_panel.sh"
     },
     "custom/sysmon": {
         "format": "",
-        "tooltip": "System Monitor",
+        "tooltip": false,
         "on-click": "plasma-systemmonitor"
     },
 
@@ -265,6 +271,7 @@
         "max-length": 80,
         "hide-empty-text": true,
         "escape": true,
+        "tooltip": false,
         "on-click": "/usr/bin/python3 /home/thigglez/.config/eww/scripts/open_popup_at_cursor.py media_popup 420 42 primary",
         "on-click-right": "playerctl next",
         "on-click-middle": "playerctl previous"
@@ -343,16 +350,16 @@
     },
     "custom/capture": {
         "format": "",
-        "tooltip": "Capture"
+        "tooltip": false
     },
     "custom/recordings-dir": {
         "format": " ",
-        "tooltip": "Open recordings folder",
+        "tooltip": false,
         "on-click": "thunar $HOME/Videos/recordings"
     },
     "custom/screenshots-dir": {
         "format": " ",
-        "tooltip": "Open screenshots folder",
+        "tooltip": false,
         "on-click": "thunar $HOME/Pictures/Screenshots"
     },
 
@@ -379,14 +386,14 @@
     },
     "custom/appmenu": {
         "format": " ",
-        "tooltip": "App Picker",
+        "tooltip": false,
         "on-click": "$HOME/.config/waybar/scripts/wofi_toggle.sh",
         "on-click-right": "wofi --show run",
         "escape": true
     },
     "wlr/taskbar": {
         "format": "{icon}",
-        "tooltip-format": "{title}",
+        "tooltip": false,
         "icon-size": 18,
         "all-outputs": false,
         "sort-by-app-id": true,
