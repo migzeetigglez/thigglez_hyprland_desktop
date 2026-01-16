@@ -1,0 +1,95 @@
+* {
+  font-family: "JetBrains Mono", "Font Awesome 6 Free", "Font Awesome 6 Brands", sans-serif;
+  font-size: 14px;
+}
+
+@define-color bg rgba(90, 130, 158, 0.985);
+@define-color surface rgba(88, 84, 81, 0.93);
+@define-color surface2 rgba(108, 101, 96, 0.86);
+@define-color border rgba(132, 123, 116, 0.28);
+@define-color text rgba(244, 232, 202, 0.99);
+@define-color textDim rgba(224, 211, 180, 0.86);
+@define-color clay #DA772F;
+@define-color wheat #D8AC44;
+@define-color sky #5D9EAA;
+@define-color moss #7AB77B;
+@define-color rose #DA483E;
+@define-color umber #6E635C;
+@define-color dusk #C47BA1;
+
+.popup-body {
+  background: @surface;
+  color: @text;
+  border: 1px solid @border;
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.popup-header {
+  margin-bottom: 8px;
+}
+
+.popup-title {
+  font-weight: 700;
+  color: @text;
+}
+
+.popup-subtitle {
+  color: @textDim;
+  margin-top: 2px;
+}
+
+.calendar {
+  background: @surface2;
+  color: @text;
+  border-radius: 12px;
+  border: 1px solid @border;
+  padding: 6px;
+}
+
+.media-row {
+  background: @surface2;
+  border: 1px solid @border;
+  border-radius: 12px;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+.media-art {
+  border-radius: 10px;
+  background: @umber;
+  margin-right: 10px;
+}
+
+.media-text {
+  color: @text;
+}
+
+.media-title {
+  font-weight: 700;
+}
+
+.media-artist,
+.media-album {
+  color: @textDim;
+}
+
+.media-controls {
+  margin-top: 2px;
+}
+
+button.media-btn {
+  background: @surface;
+  color: @text;
+  border: 1px solid @border;
+  border-radius: 999px;
+  padding: 4px 10px;
+  margin-right: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.22);
+}
+
+button.media-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}

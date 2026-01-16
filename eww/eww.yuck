@@ -1,0 +1,49 @@
+(defpoll date_str :interval "60s"
+  `date '+%A, %B %d'`)
+
+(defpoll time_str :interval "10s"
+  `date '+%I:%M %p'`)
+
+(defpoll media :interval "1s"
+  `~/.config/eww/scripts/media_now.py`)
+
+(defwidget popup_header [title subtitle]
+  (box :class "popup-header" :orientation "vertical" :space-evenly false
+    (label :class "popup-title" :text title)
+    (label :class "popup-subtitle" :text subtitle)))
+
+(defwindow calendar_popup
+  :monitor 0
+  :geometry (geometry :x "10px" :y "40px" :width "360px" :height "320px" :anchor "top left")
+  :stacking "fg"
+  :focusable false
+  :exclusive false
+  (box :class "popup-body" :orientation "vertical" :space-evenly false
+    (popup_header :title "Calendar" :subtitle date_str)
+    (calendar :class "calendar"
+      :show-heading true
+      :show-day-names true
+      :show-week-numbers false
+      :onclick "~/.config/eww/scripts/open_calendar.sh {2}-{1}-{0}")))
+
+(defwidget media_controls []
+  (box :class "media-controls" :orientation "horizontal" :space-evenly false
+    (button :class "media-btn" :onclick "playerctl --player=${media.player} play-pause" "Play/Pause")
+    (button :class "media-btn" :onclick "playerctl --player=${media.player} previous" "Prev")
+    (button :class "media-btn" :onclick "playerctl --player=${media.player} next" "Next")))
+
+(defwindow media_popup
+  :monitor 0
+  :geometry (geometry :x "10px" :y "40px" :width "420px" :height "170px" :anchor "top left")
+  :stacking "fg"
+  :focusable false
+  :exclusive false
+  (box :class "popup-body" :orientation "vertical" :space-evenly false
+    (popup_header :title "Now Playing" :subtitle time_str)
+    (box :class "media-row" :orientation "horizontal" :space-evenly false
+      (image :class "media-art" :path "${media.art_path}" :image-width 64 :image-height 64 :preserve-aspect-ratio true)
+      (box :class "media-text" :orientation "vertical" :space-evenly false
+        (label :class "media-title" :text "${media.title}")
+        (label :class "media-artist" :text "${media.artist}")
+        (label :class "media-album" :text "${media.album}")))
+    (media_controls)))

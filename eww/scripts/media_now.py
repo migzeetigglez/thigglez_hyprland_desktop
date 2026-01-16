@@ -7,8 +7,7 @@ import urllib.parse
 import urllib.request
 
 
-def run_playerctl(player, args):
-    cmd = ["playerctl", f"--player={player}"] + args
+def run(cmd):
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
         return None
@@ -16,14 +15,14 @@ def run_playerctl(player, args):
 
 
 def list_players():
-    result = subprocess.run(["playerctl", "-l"], capture_output=True, text=True)
-    if result.returncode != 0:
+    out = run(["playerctl", "-l"])
+    if not out:
         return []
-    return [line.strip() for line in result.stdout.splitlines() if line.strip()]
+    return [line.strip() for line in out.splitlines() if line.strip()]
 
 
 def player_status(player):
-    return run_playerctl(player, ["status"])
+    return run(["playerctl", f"--player={player}", "status"])
 
 
 def select_player():
@@ -38,18 +37,6 @@ def select_player():
                 return player, st
 
     return None, None
-
-
-def format_time(seconds):
-    if seconds < 0:
-        seconds = 0
-    total = int(seconds)
-    hours = total // 3600
-    minutes = (total % 3600) // 60
-    secs = total % 60
-    if hours > 0:
-        return f"{hours}:{minutes:02d}:{secs:02d}"
-    return f"{minutes}:{secs:02d}"
 
 
 def cache_dir():
@@ -69,7 +56,7 @@ def download(url, dest):
 
 def update_art(art_url):
     if not art_url:
-        return
+        return ""
 
     cache = cache_dir()
     url_file = os.path.join(cache, "spotify-art-url")
@@ -85,10 +72,10 @@ def update_art(art_url):
                     os.symlink(path, art_file)
                 except OSError:
                     pass
-        return
+        return art_file
 
     if not art_url.startswith("http"):
-        return
+        return ""
 
     last_url = None
     if os.path.exists(url_file):
@@ -99,69 +86,52 @@ def update_art(art_url):
             last_url = None
 
     if art_url == last_url and os.path.exists(art_file):
-        return
+        return art_file
 
     try:
         download(art_url, art_file)
         with open(url_file, "w", encoding="utf-8") as fh:
             fh.write(art_url)
+        return art_file
     except Exception:
-        pass
-
-
-def build_bar(position_sec, length_sec, width=12):
-    if length_sec <= 0:
-        return "[------------]"
-    ratio = max(0.0, min(1.0, position_sec / length_sec))
-    filled = int(ratio * width)
-    return "[" + ("#" * filled) + ("-" * (width - filled)) + "]"
+        return ""
 
 
 def main():
     player, status = select_player()
-    if not player or not status:
-        sys.stdout.write(json.dumps({"text": ""}))
+    if not player:
+        payload = {
+            "available": False,
+            "status": "Stopped",
+            "artist": "",
+            "title": "No media playing",
+            "album": "",
+            "player": "",
+            "art_path": "",
+        }
+        sys.stdout.write(json.dumps(payload))
         return
 
-    status_lower = status.lower()
-    if status_lower == "stopped":
-        sys.stdout.write(json.dumps({"text": ""}))
-        return
-
-    artist = run_playerctl(player, ["metadata", "--format", "{{artist}}"])
-    title = run_playerctl(player, ["metadata", "--format", "{{title}}"])
-    album = run_playerctl(player, ["metadata", "--format", "{{album}}"])
-    art_url = run_playerctl(player, ["metadata", "--format", "{{mpris:artUrl}}"])
-
-    length_us = run_playerctl(player, ["metadata", "--format", "{{mpris:length}}"])
-    position = run_playerctl(player, ["position"])
-
-    try:
-        length_sec = float(length_us) / 1_000_000 if length_us else 0.0
-    except ValueError:
-        length_sec = 0.0
-
-    try:
-        position_sec = float(position) if position else 0.0
-    except ValueError:
-        position_sec = 0.0
+    artist = run(["playerctl", f"--player={player}", "metadata", "--format", "{{artist}}"])
+    title = run(["playerctl", f"--player={player}", "metadata", "--format", "{{title}}"])
+    album = run(["playerctl", f"--player={player}", "metadata", "--format", "{{album}}"])
+    art_url = run(["playerctl", f"--player={player}", "metadata", "--format", "{{mpris:artUrl}}"])
 
     artist = artist or "Unknown Artist"
     title = title or "Unknown Title"
+    album = album or ""
+    status = status or ""
 
-    update_art(art_url)
-
-    bar = build_bar(position_sec, length_sec)
-    time_text = f"{format_time(position_sec)}/{format_time(length_sec)}"
-    text = f"{artist} - {title} {bar} {time_text}"
-
-    tooltip = album or "Unknown Album"
-    tooltip = f"{tooltip} ({player})"
+    art_path = update_art(art_url)
 
     payload = {
-        "text": text,
-        "class": status_lower,
-        "tooltip": tooltip
+        "available": True,
+        "status": status,
+        "artist": artist,
+        "title": title,
+        "album": album,
+        "player": player,
+        "art_path": art_path,
     }
     sys.stdout.write(json.dumps(payload))
 
