@@ -66,6 +66,12 @@ button:hover {
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.32);
 }
 
+/* Keep the workspaces pill stable on hover; buttons handle their own hover. */
+#workspaces.module:hover {
+  background-color: @surface;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+}
+
 /* Window title: quieter */
 #window {
   background: @surface2;
