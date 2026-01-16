@@ -8,6 +8,7 @@ from pathlib import Path
 
 HYPRCTL = shutil.which("hyprctl") or "/usr/bin/hyprctl"
 EWW = shutil.which("eww") or "/usr/bin/eww"
+EWW_CONFIG = "/home/thigglez/.config/eww"
 LOG_PATH = Path("/tmp/eww-popup.log")
 POSITIONS_PATH = Path.home() / ".config" / "eww" / "popup_positions.json"
 EDGE_MAP = {
@@ -134,6 +135,8 @@ def main():
     positions = load_positions()
     ratio, stored_edge = get_ratio(positions, window, monitor)
     edge = stored_edge or EDGE_MAP.get(window, "left")
+    if window == "media_popup":
+        ratio = None
 
     if ratio is None:
         rel_x = int(cursor["x"] - mx - (width / 2))
@@ -148,7 +151,7 @@ def main():
 
     pos = f"{rel_x}x{y_pos}"
     size = f"{width}x{height}"
-    cmd = [EWW, "open", "--toggle", window, "--pos", pos, "--size", size, "--anchor", "top left"]
+    cmd = [EWW, "--config", EWW_CONFIG, "open", "--toggle", window, "--pos", pos, "--size", size, "--anchor", "top left"]
     if monitor_name:
         if monitor_name in ("<primary>", "primary"):
             screen_name = monitor.get("model") or monitor.get("name")
@@ -156,6 +159,7 @@ def main():
             screen_name = monitor_name
         if screen_name:
             cmd.extend(["--screen", screen_name])
+    log(f"calc window={window} monitor={monitor.get('name')} width={mw} ratio={ratio} edge={edge} rel_x={rel_x} pos={pos} size={size}")
     subprocess.run(cmd, check=False)
     return 0
 

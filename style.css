@@ -438,11 +438,13 @@ button:hover {
 #custom-vpn.off.settings-pill,
 #custom-bluetooth.settings-pill,
 #custom-bluetooth.off.settings-pill,
+#custom-notifications.settings-pill,
 #custom-sysmon.settings-pill,
 #idle_inhibitor.settings-pill,
 #power-profiles-daemon.settings-pill,
 .settings-pill #custom-vpn,
 .settings-pill #custom-bluetooth,
+.settings-pill #custom-notifications,
 .settings-pill #custom-sysmon,
 .settings-pill #idle_inhibitor,
 .settings-pill #power-profiles-daemon {

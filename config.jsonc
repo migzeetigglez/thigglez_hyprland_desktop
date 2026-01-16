@@ -30,6 +30,7 @@
         "battery",
         "battery#bat2",
         "clock#time",
+        "custom/notifications",
         "custom/power"
     ],
 
@@ -245,6 +246,11 @@
     "custom/settings": {
         "format": "",
         "tooltip": "Settings"
+    },
+    "custom/notifications": {
+        "format": "",
+        "tooltip": "Notification history",
+        "on-click": "/home/thigglez/.config/eww/scripts/toggle_notifications_panel.sh"
     },
     "custom/sysmon": {
         "format": "",
