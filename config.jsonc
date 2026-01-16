@@ -38,6 +38,7 @@
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
+        "on-click": "/usr/bin/python3 /home/thigglez/.config/eww/scripts/open_popup_at_cursor.py calendar_popup 360 42 primary",
         "format": "{name} {icon}",
         "format-icons": {
             "locked": "",
@@ -80,6 +81,7 @@
     "clock#time": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "on-click": "/usr/bin/python3 /home/thigglez/.config/eww/scripts/open_popup_at_cursor.py calendar_popup 360 42 primary",
         "format": "{:%I:%M %p}"
     },
 
@@ -183,7 +185,7 @@
         "drawer": {
             "children-class": "audio-pill",
             "click-to-reveal": true,
-            "transition-duration": 250,
+            "transition-duration": 350,
             "transition-left-to-right": false
         },
         "modules": [
@@ -205,7 +207,7 @@
         "drawer": {
             "children-class": "metrics-pill",
             "click-to-reveal": true,
-            "transition-duration": 250,
+            "transition-duration": 350,
             "transition-left-to-right": false
         },
         "modules": [
@@ -228,7 +230,7 @@
         "drawer": {
             "children-class": "settings-pill",
             "click-to-reveal": true,
-            "transition-duration": 250,
+            "transition-duration": 350,
             "transition-left-to-right": false
         },
         "modules": [
@@ -257,9 +259,9 @@
         "max-length": 80,
         "hide-empty-text": true,
         "escape": true,
-        "on-click": "playerctl --player=spotify,spotifyd play-pause",
-        "on-click-right": "playerctl --player=spotify,spotifyd next",
-        "on-click-middle": "playerctl --player=spotify,spotifyd previous"
+        "on-click": "/usr/bin/python3 /home/thigglez/.config/eww/scripts/open_popup_at_cursor.py media_popup 420 42 primary",
+        "on-click-right": "playerctl next",
+        "on-click-middle": "playerctl previous"
     },
 
     "custom/updates": {
@@ -322,7 +324,7 @@
         "drawer": {
             "children-class": "capture-pill",
             "click-to-reveal": true,
-            "transition-duration": 250,
+            "transition-duration": 350,
             "transition-left-to-right": false
         },
         "modules": [
