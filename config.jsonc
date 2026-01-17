@@ -192,7 +192,7 @@
         "drawer": {
             "children-class": "audio-pill",
             "click-to-reveal": true,
-            "transition-duration": 350,
+            "transition-duration": 420,
             "transition-left-to-right": false
         },
         "modules": [
@@ -214,7 +214,7 @@
         "drawer": {
             "children-class": "metrics-pill",
             "click-to-reveal": true,
-            "transition-duration": 350,
+            "transition-duration": 420,
             "transition-left-to-right": false
         },
         "modules": [
@@ -237,7 +237,7 @@
         "drawer": {
             "children-class": "settings-pill",
             "click-to-reveal": true,
-            "transition-duration": 350,
+            "transition-duration": 420,
             "transition-left-to-right": false
         },
         "modules": [
@@ -266,7 +266,7 @@
 
     "custom/spotify": {
         "return-type": "json",
-        "interval": 1,
+        "interval": 5,
         "exec": "$HOME/.config/waybar/scripts/spotify_now.py",
         "max-length": 80,
         "hide-empty-text": true,
@@ -300,14 +300,14 @@
 
     "custom/mic": {
         "return-type": "json",
-        "interval": 2,
+        "interval": 4,
         "exec": "$HOME/.config/waybar/scripts/mic.sh",
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
     },
 
     "custom/net": {
         "return-type": "json",
-        "interval": 1,
+        "interval": 5,
         "exec": "$HOME/.config/waybar/scripts/net_traffic.sh",
         "min-length": 18,
         "max-length": 24,
@@ -322,7 +322,7 @@
     },
     "custom/screenrecord": {
         "return-type": "json",
-        "interval": 1,
+        "interval": 5,
         "exec": "$HOME/.config/waybar/scripts/screen_record.sh",
         "on-click": "$HOME/.config/waybar/scripts/screen_record_toggle.sh"
     },
@@ -337,7 +337,7 @@
         "drawer": {
             "children-class": "capture-pill",
             "click-to-reveal": true,
-            "transition-duration": 350,
+            "transition-duration": 420,
             "transition-left-to-right": false
         },
         "modules": [
@@ -365,14 +365,14 @@
 
     "custom/default-sink": {
         "exec": "$HOME/.config/waybar/scripts/default_sink.sh",
-        "interval": 2,
+        "interval": 4,
         "hide-empty-text": true,
         "tooltip": false
     },
 
     "custom/volmute": {
         "return-type": "json",
-        "interval": 2,
+        "interval": 4,
         "exec": "$HOME/.config/waybar/scripts/volmute.sh",
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
     },
