@@ -29,51 +29,16 @@ def select_player():
     players = list_players()
     if not players:
         return None, None
+    ignored = {"playerctld"}
+    candidates = [player for player in players if player not in ignored]
+    if not candidates:
+        return None, None
 
-    browsers = {
-        "vivaldi",
-        "vivaldi-stable",
-        "firefox",
-        "chromium",
-        "chrome",
-        "google-chrome",
-        "brave",
-        "brave-browser",
-    }
-    non_browser_players = [p for p in players if p.lower() not in browsers]
-    candidates = non_browser_players if non_browser_players else players
-
-    preferred = [
-        "spotify",
-        "com.spotify.Client",
-        "spotify-player",
-    ]
-
-    def pick_from(candidates, status):
+    for status in ("Playing", "Paused"):
         for player in candidates:
             st = player_status(player)
             if st == status:
                 return player, st
-        return None, None
-
-    for status in ("Playing", "Paused"):
-        # Prefer Spotify (or similar) when available.
-        for key in preferred:
-            for player in candidates:
-                if key in player.lower():
-                    chosen, st = pick_from([player], status)
-                    if chosen:
-                        return chosen, st
-
-        # Then pick any candidate based on status.
-        chosen, st = pick_from(candidates, status)
-        if chosen:
-            return chosen, st
-
-        # Fall back to any player if candidates are empty.
-        chosen, st = pick_from(players, status)
-        if chosen:
-            return chosen, st
 
     return None, None
 

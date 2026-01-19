@@ -31,16 +31,8 @@ def select_player():
     if not players:
         return None, None
 
-    preferred = [
-        "spotify",
-        "com.spotify.Client",
-        "spotify-player",
-    ]
-    candidates = []
-    for player in players:
-        lower = player.lower()
-        if any(key in lower for key in preferred):
-            candidates.append(player)
+    ignored = {"playerctld"}
+    candidates = [player for player in players if player not in ignored]
     if not candidates:
         return None, None
 
