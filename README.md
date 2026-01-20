@@ -49,7 +49,7 @@ Terminal: Kitty paired with Fish shell prompt styling and matching theme.
 ## Bootstrap (recommended)
 1) Clone this repo (recommended path: `~/dotfiles`):
    ```bash
-   git clone <repo-url> ~/dotfiles
+   git clone https://github.com/migzeetigglez/thigglez_hyprland_desktop ~/dotfiles
    ```
 2) Run the bootstrap script (installs deps + stows configs):
    ```bash
