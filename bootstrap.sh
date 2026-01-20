@@ -32,6 +32,13 @@ COMMON_DEPS=(
   zsh
   bash
   kitty
+  hypridle
+  hyprlock
+  walker
+  tte
+  xdg-terminal-exec
+  libnotify
+  brightnessctl
 )
 
 APT_DEPS=(
@@ -60,6 +67,13 @@ APT_DEPS=(
   zsh
   bash
   kitty
+  hypridle
+  hyprlock
+  walker
+  tte
+  xdg-terminal-exec
+  libnotify
+  brightnessctl
 )
 
 DNF_DEPS=(
@@ -89,6 +103,13 @@ DNF_DEPS=(
   zsh
   bash
   kitty
+  hypridle
+  hyprlock
+  walker
+  tte
+  xdg-terminal-exec
+  libnotify
+  brightnessctl
 )
 
 PACMAN_DEPS=("${COMMON_DEPS[@]}")

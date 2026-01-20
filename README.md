@@ -38,6 +38,10 @@ Terminal: Kitty paired with Fish shell prompt styling and matching theme.
 - ImageMagick (optional tonemapping for HDR screenshots)
 - swaync
 - hyprpaper
+- hypridle + hyprlock (Omarchy)
+- walker + tte + xdg-terminal-exec (Omarchy)
+- libnotify
+- brightnessctl (optional; Omarchy resume)
 - pavucontrol
 - blueman
 - fish, zsh, bash
