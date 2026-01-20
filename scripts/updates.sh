@@ -16,6 +16,6 @@ if [ "$count" -eq 0 ]; then
 fi
 
 preview=$(printf '%s
-' "$updates" | sed -n '1,10p')
+' "$updates" | sed -n '1,10p' | sed ':a;N;$!ba;s/\n/\\n/g')
 
 printf '{"text":" %s","tooltip":"%s","class":"warn"}\n' "$count" "$preview"

@@ -1,0 +1,77 @@
+#!/bin/bash
+
+# Launch the Omarchy screensaver in the default terminal on the system with the correct font configuration.
+
+OMARCHY_HOME="$HOME/.config/hypr/omarchy-local"
+ALACRITTY_CONF="$OMARCHY_HOME/default/alacritty/screensaver.toml"
+GHOSTTY_CONF="$OMARCHY_HOME/default/ghostty/screensaver"
+SCREENSAVER_CMD="$OMARCHY_HOME/bin/omarchy-cmd-screensaver"
+
+# Exit early if we don't have the tte show
+if ! command -v tte &>/dev/null; then
+  exit 1
+fi
+
+# Exit early if screensave is already running
+pgrep -f org.omarchy.screensaver && exit 0
+
+# Allow screensaver to be turned off but also force started
+if [[ -f ~/.local/state/omarchy/toggles/screensaver-off ]] && [[ $1 != "force" ]]; then
+  exit 1
+fi
+
+# Silently quit Walker on overlay (if installed)
+if command -v walker &>/dev/null; then
+  walker -q
+fi
+
+focused=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true).name')
+if command -v xdg-terminal-exec &>/dev/null; then
+  terminal=$(xdg-terminal-exec --print-id)
+else
+  terminal="kitty"
+fi
+
+for m in $(hyprctl monitors -j | jq -r '.[] | .name'); do
+  hyprctl dispatch focusmonitor $m
+
+  case $terminal in
+  *Alacritty*)
+    alacritty_args=()
+    if [[ -f "$ALACRITTY_CONF" ]]; then
+      alacritty_args+=(--config-file "$ALACRITTY_CONF")
+    fi
+    hyprctl dispatch exec -- \
+      alacritty --class=org.omarchy.screensaver \
+      "${alacritty_args[@]}" \
+      -e "$SCREENSAVER_CMD"
+    ;;
+  *ghostty*)
+    ghostty_args=()
+    if [[ -f "$GHOSTTY_CONF" ]]; then
+      ghostty_args+=(--config-file="$GHOSTTY_CONF")
+    fi
+    hyprctl dispatch exec -- \
+      ghostty --class=org.omarchy.screensaver \
+      "${ghostty_args[@]}" \
+      --font-size=18 \
+      -e "$SCREENSAVER_CMD"
+    ;;
+  *kitty*)
+    hyprctl dispatch exec -- \
+      kitty --class=org.omarchy.screensaver \
+      --override font_size=18 \
+      --override window_padding_width=0 \
+      -e "$SCREENSAVER_CMD"
+    ;;
+  *)
+    notify-send "✋  Screensaver only runs in Alacritty, Ghostty, or Kitty"
+    ;;
+  esac
+
+  # Ensure the screensaver window receives focus before the command checks it.
+  sleep 0.2
+  hyprctl dispatch focuswindow class:org.omarchy.screensaver >/dev/null 2>&1 || true
+done
+
+hyprctl dispatch focusmonitor $focused

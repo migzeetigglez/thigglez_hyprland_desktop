@@ -363,8 +363,6 @@ button:hover {
 #cpu,
 #memory,
 #temperature,
-#backlight,
-#keyboard-state,
 #custom-metrics {
   background: rgba(80, 73, 69, 0.55);     /* bg2 tint */
   border: 1px solid rgba(80, 73, 69, 0.70);
@@ -396,6 +394,7 @@ button:hover {
 #custom-metrics,
 #custom-settings,
 #custom-bluetooth,
+#custom-peripheral-battery,
 #custom-vpn,
 #custom-updates,
 #custom-power {
@@ -405,34 +404,26 @@ button:hover {
 }
 
 /* Metrics drawer: base colors for child pills */
-#idle_inhibitor,
-#power-profiles-daemon,
 #custom-sysmon,
 #cpu,
 #memory,
 #temperature,
 #custom-disk,
 #network,
-#custom-net,
-#backlight,
-#keyboard-state {
+#custom-net {
   background: rgba(214, 93, 14, 0.50);   /* muted clay */
   border: 1px solid rgba(214, 93, 14, 0.70);
   color: @text;
 }
 
 /* Metrics drawer: unify child pills */
-#idle_inhibitor.metrics-pill,
-#power-profiles-daemon.metrics-pill,
 #custom-sysmon.metrics-pill,
 #cpu.metrics-pill,
 #memory.metrics-pill,
 #temperature.metrics-pill,
 #custom-disk.metrics-pill,
 #network.metrics-pill,
-#custom-net.metrics-pill,
-#backlight.metrics-pill,
-#keyboard-state.metrics-pill {
+#custom-net.metrics-pill {
   background: rgba(214, 93, 14, 0.50);   /* muted clay */
   border: 1px solid rgba(214, 93, 14, 0.70);
   color: @text;
@@ -445,15 +436,13 @@ button:hover {
 #custom-bluetooth.settings-pill,
 #custom-bluetooth.off.settings-pill,
 #custom-notifications.settings-pill,
+#custom-peripheral-battery.settings-pill,
 #custom-sysmon.settings-pill,
-#idle_inhibitor.settings-pill,
-#power-profiles-daemon.settings-pill,
 .settings-pill #custom-vpn,
 .settings-pill #custom-bluetooth,
 .settings-pill #custom-notifications,
 .settings-pill #custom-sysmon,
-.settings-pill #idle_inhibitor,
-.settings-pill #power-profiles-daemon {
+.settings-pill #custom-peripheral-battery {
   background: rgba(69, 133, 136, 0.45);   /* muted sky */
   border: 1px solid rgba(69, 133, 136, 0.70);
   color: @text;
@@ -461,26 +450,6 @@ button:hover {
 
 #temperature.critical {
   background: rgba(204, 36, 29, 0.80);
-  border: 1px solid rgba(204, 36, 29, 1);
-  color: @text;
-}
-
-/* ===== Battery ===== */
-#battery {
-  background: rgba(80, 73, 69, 0.65);
-  border: 1px solid rgba(80, 73, 69, 0.90);
-  color: @text;
-}
-
-#battery.charging,
-#battery.plugged {
-  background: rgba(104, 157, 106, 0.85);   /* moss */
-  border: 1px solid rgba(104, 157, 106, 1);
-  color: rgba(29, 32, 33, 0.98);
-}
-
-#battery.critical:not(.charging) {
-  background: rgba(204, 36, 29, 0.85);
   border: 1px solid rgba(204, 36, 29, 1);
   color: @text;
 }
