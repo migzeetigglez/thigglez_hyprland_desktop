@@ -1,0 +1,406 @@
+// -*- mode: jsonc -*-
+{
+    // "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 30, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 4, // Gaps between modules (4px)
+
+    // Choose the order of the modules
+    "modules-left": [
+        "custom/appmenu",
+        "tray",
+        "wlr/taskbar",
+        "custom/spotify",
+        "hyprland/submap"
+    ],
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+    "modules-right": [
+        "hyprland/window",
+        "custom/default-sink",
+        "group/capture",
+        "group/audio",
+        "group/metrics",
+        "group/settings",
+        "custom/updates",
+        "backlight",
+        "keyboard-state",
+        "battery",
+        "battery#bat2",
+        "clock#time",
+        "custom/notifications",
+        "custom/power"
+    ],
+
+    // Modules configuration
+
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "on-click": "/usr/bin/python3 /home/thigglez/.config/eww/scripts/open_popup_at_cursor.py calendar_popup 360 42 primary",
+        "tooltip": false,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+    },
+
+    "hyprland/submap": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "hyprland/workspaces": {
+        "persistent-workspaces": {
+            "*": 1
+        }
+    },
+
+    "hyprland/window": {
+        "expand": true,
+        "justify": "left",
+        "align": 0
+    },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+        // "icons": {
+        //   "blueman": "bluetooth",
+        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+        // }
+    },
+
+    "clock#time": {
+        // "timezone": "America/New_York",
+        "tooltip": false,
+        "on-click": "/usr/bin/python3 /home/thigglez/.config/eww/scripts/open_popup_at_cursor.py calendar_popup 360 42 primary",
+        "format": "{:%I:%M %p}"
+    },
+
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+
+    "memory": {
+        "format": "{}% ",
+        "tooltip": false
+    },
+
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""],
+        "tooltip": false
+    },
+
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
+        "tooltip": false
+    },
+
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip": false
+    },
+
+    "battery#bat2": {
+        "bat": "BAT2",
+        "tooltip": false
+    },
+
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip": false,
+      "format-icons": {
+        "default": "",
+        "performance": "",
+        "balanced": "",
+        "power-saver": ""
+      }
+    },
+
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip": false,
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "min-length": 18,
+        "max-length": 24,
+        "align": 0.5
+    },
+
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "tooltip": false,
+        "on-click": "pavucontrol"
+    },
+
+    "pulseaudio/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal"
+    },
+
+    "group/audio": {
+        "orientation": "horizontal",
+        "drawer": {
+            "children-class": "audio-pill",
+            "click-to-reveal": true,
+            "transition-duration": 420,
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "custom/audio",
+            "pulseaudio",
+            "pulseaudio/slider",
+            "custom/volmute",
+            "custom/mic"
+        ]
+    },
+
+    "custom/audio": {
+        "format": "",
+        "tooltip": false
+    },
+
+    "group/metrics": {
+        "orientation": "horizontal",
+        "drawer": {
+            "children-class": "metrics-pill",
+            "click-to-reveal": true,
+            "transition-duration": 420,
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "custom/metrics",
+            "cpu",
+            "memory",
+            "temperature",
+            "custom/disk",
+            "network",
+            "custom/net"
+        ]
+    },
+
+    "custom/metrics": {
+        "format": "",
+        "tooltip": false
+    },
+    "group/settings": {
+        "orientation": "horizontal",
+        "drawer": {
+            "children-class": "settings-pill",
+            "click-to-reveal": true,
+            "transition-duration": 420,
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "custom/settings",
+            "custom/vpn",
+            "custom/bluetooth",
+            "custom/sysmon",
+            "idle_inhibitor",
+            "power-profiles-daemon"
+        ]
+    },
+    "custom/settings": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/notifications": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "/home/thigglez/.config/eww/scripts/toggle_notifications_panel.sh"
+    },
+    "custom/sysmon": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "plasma-systemmonitor"
+    },
+
+    "custom/spotify": {
+        "return-type": "json",
+        "interval": 5,
+        "exec": "$HOME/.config/waybar/scripts/spotify_now.py",
+        "max-length": 80,
+        "hide-empty-text": true,
+        "escape": true,
+        "tooltip": false,
+        "on-click": "/usr/bin/python3 /home/thigglez/.config/eww/scripts/open_popup_at_cursor.py media_popup 420 42 primary",
+        "on-click-right": "playerctl next",
+        "on-click-middle": "playerctl previous"
+    },
+
+    "custom/updates": {
+        "return-type": "json",
+        "interval": 600,
+        "exec": "$HOME/.config/waybar/scripts/updates.sh",
+        "hide-empty-text": true
+    },
+
+    "custom/disk": {
+        "return-type": "json",
+        "interval": 60,
+        "exec": "$HOME/.config/waybar/scripts/disk_home.sh"
+    },
+
+    "custom/vpn": {
+        "return-type": "json",
+        "interval": 10,
+        "exec": "$HOME/.config/waybar/scripts/vpn.sh",
+        "on-click": "$HOME/.config/waybar/scripts/mullvad_toggle.sh",
+        "hide-empty-text": true
+    },
+
+    "custom/mic": {
+        "return-type": "json",
+        "interval": 4,
+        "exec": "$HOME/.config/waybar/scripts/mic.sh",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+    },
+
+    "custom/net": {
+        "return-type": "json",
+        "interval": 5,
+        "exec": "$HOME/.config/waybar/scripts/net_traffic.sh",
+        "min-length": 18,
+        "max-length": 24,
+        "align": 0.5
+    },
+
+    "custom/bluetooth": {
+        "return-type": "json",
+        "interval": 5,
+        "exec": "$HOME/.config/waybar/scripts/bluetooth.sh",
+        "on-click": "blueman-manager"
+    },
+    "custom/screenrecord": {
+        "return-type": "json",
+        "interval": 5,
+        "exec": "$HOME/.config/waybar/scripts/screen_record.sh",
+        "on-click": "$HOME/.config/waybar/scripts/screen_record_toggle.sh"
+    },
+    "custom/screenshot": {
+        "return-type": "json",
+        "interval": 3600,
+        "exec": "$HOME/.config/waybar/scripts/screenshot.sh",
+        "on-click": "$HOME/.config/waybar/scripts/screenshot_take.sh"
+    },
+    "group/capture": {
+        "orientation": "horizontal",
+        "drawer": {
+            "children-class": "capture-pill",
+            "click-to-reveal": true,
+            "transition-duration": 420,
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "custom/capture",
+            "custom/screenrecord",
+            "custom/screenshot",
+            "custom/recordings-dir",
+            "custom/screenshots-dir"
+        ]
+    },
+    "custom/capture": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/recordings-dir": {
+        "format": " ",
+        "tooltip": false,
+        "on-click": "thunar $HOME/Videos/recordings"
+    },
+    "custom/screenshots-dir": {
+        "format": " ",
+        "tooltip": false,
+        "on-click": "thunar $HOME/Pictures/Screenshots"
+    },
+
+    "custom/default-sink": {
+        "exec": "$HOME/.config/waybar/scripts/default_sink.sh",
+        "interval": 4,
+        "hide-empty-text": true,
+        "tooltip": false
+    },
+
+    "custom/volmute": {
+        "return-type": "json",
+        "interval": 4,
+        "exec": "$HOME/.config/waybar/scripts/volmute.sh",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    },
+
+    "custom/power": {
+        "format" : "⏻",
+        "tooltip": false,
+        "min-length": 4,
+        "align": 0.5,
+        "on-click": "$HOME/.config/waybar/scripts/power_menu.sh"
+    },
+    "custom/appmenu": {
+        "format": " ",
+        "tooltip": false,
+        "on-click": "$HOME/.config/waybar/scripts/wofi_toggle.sh",
+        "on-click-right": "wofi --show run",
+        "escape": true
+    },
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "tooltip": false,
+        "icon-size": 18,
+        "all-outputs": false,
+        "sort-by-app-id": true,
+        "on-click": "activate",
+        "on-click-right": "minimize",
+        "on-click-middle": "close",
+        "ignore-list": ["waybar"]
+    }
+
+}

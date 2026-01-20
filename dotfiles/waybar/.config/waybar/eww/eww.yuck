@@ -1,0 +1,93 @@
+(defpoll date_str :interval "60s"
+  `date '+%A, %B %d'`)
+
+(defpoll time_str :interval "10s"
+  `date '+%I:%M %p'`)
+
+(defpoll media :interval "1s" :initial "{}"
+  `sh -c 'out="$(~/.config/eww/scripts/media_now.py 2>/dev/null)"; if [ -n "$out" ]; then echo "$out"; else echo "{}"; fi'`)
+
+(defpoll notifications :interval "5s" :initial "[]"
+  `sh -c 'out="$(~/.config/eww/scripts/notifications_for_eww.py 2>/dev/null)"; if [ -n "$out" ]; then echo "$out"; else echo "[]"; fi'`)
+
+(defvar notif_panel_class "open")
+
+(defwidget popup_header [title subtitle]
+  (box :class "popup-header" :orientation "vertical" :space-evenly false
+    (label :class "popup-title" :text title)
+    (label :class "popup-subtitle" :text subtitle)))
+
+(defwindow calendar_popup
+  :monitor 0
+  :geometry (geometry :x "10px" :y "40px" :width "360px" :height "320px" :anchor "top left")
+  :stacking "fg"
+  :focusable false
+  :exclusive false
+  (box :class "popup-body" :orientation "vertical" :space-evenly false
+    (popup_header :title "Calendar" :subtitle date_str)
+    (calendar :class "calendar"
+      :show-heading true
+      :show-day-names true
+      :show-week-numbers false
+      :onclick "~/.config/eww/scripts/open_calendar.sh {2}-{1}-{0}")))
+
+(defwidget media_controls []
+  (box :class "media-controls" :orientation "horizontal" :space-evenly false
+    (button :class "media-btn" :onclick "playerctl --player=${media.player} play-pause" "Play/Pause")
+    (button :class "media-btn" :onclick "playerctl --player=${media.player} previous" "Prev")
+    (button :class "media-btn" :onclick "playerctl --player=${media.player} next" "Next")))
+
+(defwidget notif_header []
+  (box :class "notif-header" :orientation "horizontal" :space-evenly false
+    (label :class "notif-header-title" :text "Notifications")
+    (box :hexpand true)
+    (button :class "notif-clear" :onclick "~/.config/eww/scripts/notifications_clear_all.py" "Nuke")
+    (button :class "notif-close" :onclick "~/.config/eww/scripts/toggle_notifications_panel.sh close" "x")))
+
+(defwidget notif_card [id summary body app urgency age desktop_entry]
+  (box :class "notif-card notif-${urgency}" :orientation "horizontal" :space-evenly false :hexpand true
+    (button :class "notif-open" :onclick "~/.config/eww/scripts/notification_open_app.py ${desktop_entry} ${app}" :hexpand true
+      (box :orientation "vertical" :space-evenly false
+        (box :class "notif-row" :orientation "horizontal" :space-evenly false
+          (label :class "notif-title" :text summary :xalign 0 :wrap true)
+          (box :hexpand true)
+          (label :class "notif-age" :text age :xalign 1))
+        (label :class "notif-body" :text body :xalign 0 :wrap true)
+        (label :class "notif-app" :text app :xalign 0)))
+    (button :class "notif-dismiss" :onclick "~/.config/eww/scripts/notifications_dismiss.py ${id}" :halign "end" :valign "start" "x")))
+
+(defwindow media_popup
+  :monitor 0
+  :geometry (geometry :x "10px" :y "40px" :width "420px" :height "170px" :anchor "top left")
+  :stacking "fg"
+  :focusable false
+  :exclusive false
+  (box :class "popup-body" :orientation "vertical" :space-evenly false
+    (popup_header :title "Now Playing" :subtitle time_str)
+    (box :class "media-row" :orientation "horizontal" :space-evenly false
+      (image :class "media-art" :path "${media.art_path}" :image-width 64 :image-height 64)
+      (box :class "media-text" :orientation "vertical" :space-evenly false
+        (label :class "media-title" :text "${media.title}")
+        (label :class "media-artist" :text "${media.artist}")
+        (label :class "media-album" :text "${media.album}")))
+    (media_controls)))
+
+(defwindow notifications_panel
+  :monitor 0
+  :geometry (geometry :x "10px" :y "40px" :width "360px" :height "80%" :anchor "top right")
+  :stacking "overlay"
+  :focusable false
+  :exclusive false
+  (box :class "notif-panel ${notif_panel_class}" :orientation "vertical" :space-evenly false
+    (notif_header)
+    (scroll :class "notif-scroll" :vscroll true :hscroll false :vexpand true :hexpand true
+      (box :class "notif-list" :orientation "vertical" :space-evenly false :spacing 8 :vexpand true :hexpand true
+        (for entry in notifications
+          (notif_card
+            :id "${entry.id}"
+            :summary "${entry.summary}"
+            :body "${entry.body}"
+            :app "${entry.app}"
+            :urgency "${entry.urgency}"
+            :age "${entry.age}"
+            :desktop_entry "${entry.desktop_entry}"))))))

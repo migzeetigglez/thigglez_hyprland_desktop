@@ -26,21 +26,43 @@ Terminal: Kitty paired with Fish shell prompt styling and matching theme.
 - Eww popup widgets for calendar + media
 
 ## Requirements
+- Hyprland
 - Waybar
-- Hyprland (for popup positioning; optional if using static Eww geometry)
+- Eww
 - Wofi
-- playerctl (for Spotify metadata)
-- A Nerd Font or Font Awesome for icons
-- wf-recorder (screen recording)
-- grim (screenshots)
-- slurp (region selection)
+- playerctl
+- pipewire + wireplumber
+- wl-clipboard
+- python3 + jq
+- grim + slurp + wf-recorder
 - ImageMagick (optional tonemapping for HDR screenshots)
-- Eww (calendar + media popups)
-- python3 (popup positioning + media metadata)
-- kitty + khal or calcurse (optional for calendar)
-- libnotify (for missing-calendar notifications)
+- swaync
+- hyprpaper
+- pavucontrol
+- blueman
+- fish, zsh, bash
+- kitty
+- neofetch
+- starship
+- A Nerd Font or Font Awesome for icons (JetBrains Mono + Font Awesome recommended)
 
-## Setup
+## Bootstrap (recommended)
+1) Clone this repo (recommended path: `~/dotfiles`):
+   ```bash
+   git clone <repo-url> ~/dotfiles
+   ```
+2) Run the bootstrap script (installs deps + stows configs):
+   ```bash
+   cd ~/dotfiles
+   ./bootstrap.sh
+   ```
+3) Start Eww daemon and restart Waybar:
+   ```bash
+   eww daemon
+   pkill waybar && waybar
+   ```
+
+## Manual Setup (legacy)
 1) Copy this repo into `~/.config/waybar`
 2) Ensure scripts are executable:
    ```bash
@@ -76,3 +98,14 @@ Terminal: Kitty paired with Fish shell prompt styling and matching theme.
 
 ## License
 Personal config; no warranty. Use at your own risk.
+
+
+## Dependencies
+The bootstrap script installs these (where available):
+- hyprland, waybar, eww, wofi
+- playerctl, pipewire, wireplumber, wl-clipboard
+- grim, slurp, wf-recorder, ImageMagick
+- swaync, hyprpaper, pavucontrol, blueman
+- fish, zsh, bash, kitty
+- neofetch, starship
+- ttf-jetbrains-mono, ttf-font-awesome (or distro equivalents)

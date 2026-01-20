@@ -1,0 +1,14 @@
+{
+  "per_monitor": {
+    "HDMI-A-1": {
+      "calendar_popup": {
+        "edge": "right",
+        "ratio": 0.5619791666666667
+      },
+      "media_popup": {
+        "edge": "left",
+        "ratio": 0.4479166666666667
+      }
+    }
+  }
+}

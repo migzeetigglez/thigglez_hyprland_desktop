@@ -1,0 +1,582 @@
+/* ==========================================
+   Waybar — Earthy Pop (Bright, Slightly Smaller)
+   Clay / Wheat / Sky / Moss / Rose + modern pills
+   ========================================== */
+
+* {
+  font-family: "JetBrains Mono", "Font Awesome 6 Free", "Font Awesome 6 Brands", sans-serif;
+  font-size: 14px;
+  min-height: 0;
+}
+
+/* ===== Palette (Gruvbox Dark Hard) ===== */
+@define-color bg rgba(90, 130, 158, 0.985);      /* brighter pastel blue */
+@define-color surface rgba(88, 84, 81, 0.93);    /* lighter bg1 */
+@define-color surface2 rgba(108, 101, 96, 0.86); /* lighter bg2 */
+@define-color border rgba(132, 123, 116, 0.28);  /* softer border */
+
+@define-color text rgba(244, 232, 202, 0.99);     /* brighter fg1 */
+@define-color textDim rgba(224, 211, 180, 0.86);  /* brighter fg2 */
+
+/* Gruvbox accents */
+@define-color clay  #DA772F;   /* brighter orange */
+@define-color wheat #D8AC44;   /* brighter yellow */
+@define-color sky   #5D9EAA;   /* brighter blue */
+@define-color moss  #7AB77B;   /* brighter aqua */
+@define-color rose  #DA483E;   /* brighter red */
+@define-color umber #6E635C;   /* lighter bg2 */
+@define-color dusk  #C47BA1;   /* brighter magenta */
+
+/* ===== Bar container ===== */
+window#waybar {
+  background: transparent;
+  color: @text;
+  border: 1px solid @border;
+  border-radius: 0;
+}
+
+/* Remove underline hover behavior */
+button {
+  border: none;
+  border-radius: 999px;
+  box-shadow: none;
+  background: transparent;
+  transition: background-color 200ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+button:hover {
+  background: rgba(204, 36, 29, 0.60);
+}
+
+/* ===== Module pill base ===== */
+.module {
+  background: @surface;
+  border: 1px solid @border;
+  border-radius: 16px;
+  padding: 5px 10px;
+  margin: 6px 6px;
+  min-height: 28px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18));
+  background-blend-mode: multiply;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+  transition: background-color 200ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1), border-color 200ms cubic-bezier(0.22, 1, 0.36, 1), color 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.module:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.32);
+}
+
+/* Keep the workspaces pill stable on hover; buttons handle their own hover. */
+#workspaces.module:hover {
+  background-color: @surface;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+}
+
+/* Window title: quieter */
+#window {
+  background: @surface2;
+  color: @textDim;
+}
+
+/* ===== Apps button ===== */
+#custom-appmenu {
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(204, 36, 29, 0.85);
+  border-radius: 16px;
+  color: transparent;
+  background-image: url("leo-picker.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 34px 38px;
+  padding: 0 20px;
+  min-width: 34px;
+  min-height: 38px;
+  margin: 6px 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+#custom-appmenu:hover {
+  background-color: rgba(204, 36, 29, 0.75);
+  border: 1px solid rgba(204, 36, 29, 0.98);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.38);
+}
+
+/* ===== Workspaces (clean, bright active) ===== */
+#workspaces { padding: 6px 10px; }
+
+#workspaces button {
+  padding: 5px 12px;
+  margin: 0 5px;
+  border-radius: 16px;
+  font-weight: 700;
+  color: @textDim;
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+#workspaces button:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+#workspaces button.active,
+#workspaces button.current {
+  color: @text;
+  background: rgba(214, 93, 14, 0.85);     /* clay */
+  border: 1px solid rgba(214, 93, 14, 0.99);
+  box-shadow: 0 0 10px rgba(214, 93, 14, 0.35);
+}
+
+#workspaces button.urgent {
+  color: @text;
+  background: rgba(204, 36, 29, 0.85);       /* rose */
+  border: 1px solid rgba(204, 36, 29, 0.99);
+  animation: pulse-urgent 2.8s ease-in-out infinite;
+}
+
+/* ===== Submap ===== */
+#submap {
+  font-weight: 700;
+  background: rgba(214, 93, 14, 0.78);
+  border: 1px solid rgba(214, 93, 14, 0.98);
+}
+
+/* ===== Media ===== */
+#custom-media {
+  color: @textDim;
+}
+
+/* ===== Spotify ===== */
+#custom-spotify {
+  color: @textDim;
+  background-image: url("/home/thigglez/.cache/waybar/spotify-art");
+  background-repeat: no-repeat;
+  background-position: 8px center;
+  background-size: 30px 30px;
+  padding-left: 46px;
+}
+#custom-spotify.playing {
+  color: @text;
+}
+#custom-spotify.paused {
+  color: @textDim;
+}
+
+/* ===== Primary info modules: BRIGHT ===== */
+#network,
+#custom-net,
+#custom-bluetooth {
+  background: rgba(69, 133, 136, 0.85);   /* sky */
+  border: 1px solid rgba(69, 133, 136, 0.99);
+  color: rgba(29, 32, 33, 0.98);
+  min-width: 170px;
+}
+
+#pulseaudio {
+  background: rgba(215, 153, 33, 0.65);   /* muted wheat */
+  border: 1px solid rgba(215, 153, 33, 0.85);
+  color: @text;
+}
+
+#custom-audio {
+  background: rgba(240, 194, 76, 0.92);   /* brighter wheat */
+  border: 1px solid rgba(240, 194, 76, 1);
+  color: rgba(29, 32, 33, 0.98);
+  min-width: 32px;
+  padding: 0 12px;
+}
+#custom-audio:hover {
+  background: rgba(240, 194, 76, 0.98);
+  border: 1px solid rgba(240, 194, 76, 1);
+}
+
+#custom-volmute {
+  background: rgba(215, 153, 33, 0.65);   /* muted wheat */
+  border: 1px solid rgba(215, 153, 33, 0.85);
+  color: @text;
+}
+
+#pulseaudio.muted {
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid @border;
+  color: @textDim;
+}
+
+#custom-volmute.muted {
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid @border;
+  color: @textDim;
+}
+
+/* Audio drawer: base colors for child pills */
+#custom-mic {
+  background: rgba(215, 153, 33, 0.65);   /* muted wheat, more distinct */
+  border: 1px solid rgba(215, 153, 33, 0.85);
+  color: @text;
+}
+
+/* Audio drawer: unify child pills */
+#pulseaudio.audio-pill,
+#pulseaudio-slider.audio-pill,
+#custom-volmute.audio-pill,
+#custom-mic.audio-pill {
+  background: rgba(215, 153, 33, 0.65);   /* muted wheat, more distinct */
+  border: 1px solid rgba(215, 153, 33, 0.85);
+  color: @text;
+}
+
+/* Drawer children: subtle inset to read as a group */
+.audio-pill,
+.metrics-pill,
+.capture-pill,
+.settings-pill {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14),
+              inset 0 -2px 0 rgba(0, 0, 0, 0.35);
+  transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes pulse-urgent {
+  0% { box-shadow: 0 0 0 rgba(204, 36, 29, 0.00); }
+  50% { box-shadow: 0 0 10px rgba(204, 36, 29, 0.35); }
+  100% { box-shadow: 0 0 0 rgba(204, 36, 29, 0.00); }
+}
+
+/* ===== Pulseaudio slider ===== */
+#pulseaudio-slider {
+  background: rgba(215, 153, 33, 0.65); /* muted wheat */
+  border: 1px solid rgba(215, 153, 33, 0.85);
+  border-radius: 16px;
+  padding: 5px 10px;
+  margin: 6px 6px;
+}
+
+/* The track */
+#pulseaudio-slider trough {
+  min-height: 8px;
+  min-width: 120px;       /* increase if you want a longer slider */
+  border-radius: 16px;
+  background: rgba(29, 32, 33, 0.35);
+}
+
+/* The filled portion */
+#pulseaudio-slider highlight {
+  border-radius: 16px;
+  background: rgba(29, 32, 33, 0.85); /* dark fill for contrast */
+}
+
+/* The handle */
+#pulseaudio-slider slider {
+  min-height: 16px;
+  min-width: 16px;
+  border-radius: 16px;
+  background: rgba(29, 32, 33, 0.95);
+  border: 1px solid rgba(102, 92, 84, 0.35);
+  box-shadow: none;
+}
+
+
+#network.disconnected {
+  background: rgba(204, 36, 29, 0.85);
+  border: 1px solid rgba(204, 36, 29, 1);
+  color: @text;
+}
+
+#custom-vpn.on {
+  background: rgba(150, 120, 195, 0.92);   /* bold lavender */
+  border: 1px solid rgba(150, 120, 195, 1);
+  color: rgba(29, 32, 33, 0.98);
+}
+
+#custom-bluetooth {
+  font-size: 16px;
+  min-width: 32px;
+  padding: 0 12px;
+}
+
+#custom-settings {
+  background: rgba(108, 176, 187, 0.92);   /* brighter sky */
+  border: 1px solid rgba(108, 176, 187, 1);
+  color: rgba(29, 32, 33, 0.98);
+  font-size: 16px;
+  min-width: 32px;
+  padding: 0 12px;
+}
+#custom-settings:hover {
+  background: rgba(108, 176, 187, 0.98);
+  border: 1px solid rgba(108, 176, 187, 1);
+}
+
+#custom-updates.warn {
+  background: rgba(204, 36, 29, 0.85);   /* rose */
+  border: 1px solid rgba(204, 36, 29, 1);
+  color: @text;
+  animation: pulse-urgent 2.8s ease-in-out infinite;
+}
+
+#custom-capture {
+  background: rgba(214, 140, 178, 0.92);   /* brighter dusk */
+  border: 1px solid rgba(214, 140, 178, 1);
+  color: rgba(29, 32, 33, 0.98);
+  font-size: 16px;
+  min-width: 32px;
+  padding: 0 12px;
+}
+#custom-capture:hover {
+  background: rgba(214, 140, 178, 0.98);
+  border: 1px solid rgba(214, 140, 178, 1);
+}
+
+#custom-screenrecord,
+#custom-screenshot,
+#custom-recordings-dir,
+#custom-screenshots-dir,
+#custom-screenrecord.capture-pill,
+#custom-screenshot.capture-pill,
+#custom-recordings-dir.capture-pill,
+#custom-screenshots-dir.capture-pill {
+  background: rgba(177, 98, 134, 0.35);   /* muted dusk */
+  border: 1px solid rgba(177, 98, 134, 0.55);
+  color: @text;
+}
+
+#custom-screenrecord.capture-pill.recording {
+  background: rgba(204, 36, 29, 0.85);   /* rose */
+  border: 1px solid rgba(204, 36, 29, 1);
+  color: @text;
+  animation: pulse-urgent 2.8s ease-in-out infinite;
+}
+
+#custom-updates.ok,
+#custom-bluetooth.off,
+#custom-mic.off {
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid @border;
+  color: @textDim;
+}
+
+#custom-vpn.off {
+  background: rgba(131, 116, 152, 0.85);   /* muted lavender */
+  border: 1px solid rgba(131, 116, 152, 0.99);
+  color: @text;
+}
+
+/* ===== Secondary metrics: still readable, less noisy ===== */
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#keyboard-state,
+#custom-metrics {
+  background: rgba(80, 73, 69, 0.55);     /* bg2 tint */
+  border: 1px solid rgba(80, 73, 69, 0.70);
+  color: @text;
+}
+
+#custom-metrics {
+  background: rgba(240, 138, 60, 0.92);   /* brighter clay */
+  border: 1px solid rgba(240, 138, 60, 1);
+  color: rgba(29, 32, 33, 0.98);
+  font-size: 16px;
+  min-width: 32px;
+  padding: 0 12px;
+}
+#custom-metrics:hover {
+  background: rgba(240, 138, 60, 0.98);
+  border: 1px solid rgba(240, 138, 60, 1);
+}
+
+/* Single-icon pills: normalize size/alignment */
+#custom-audio,
+#custom-volmute,
+#custom-mic,
+#custom-capture,
+#custom-screenrecord,
+#custom-screenshot,
+#custom-recordings-dir,
+#custom-screenshots-dir,
+#custom-metrics,
+#custom-settings,
+#custom-bluetooth,
+#custom-vpn,
+#custom-updates,
+#custom-power {
+  font-size: 16px;
+  min-width: 32px;
+  padding: 0 12px;
+}
+
+/* Metrics drawer: base colors for child pills */
+#idle_inhibitor,
+#power-profiles-daemon,
+#custom-sysmon,
+#cpu,
+#memory,
+#temperature,
+#custom-disk,
+#network,
+#custom-net,
+#backlight,
+#keyboard-state {
+  background: rgba(214, 93, 14, 0.50);   /* muted clay */
+  border: 1px solid rgba(214, 93, 14, 0.70);
+  color: @text;
+}
+
+/* Metrics drawer: unify child pills */
+#idle_inhibitor.metrics-pill,
+#power-profiles-daemon.metrics-pill,
+#custom-sysmon.metrics-pill,
+#cpu.metrics-pill,
+#memory.metrics-pill,
+#temperature.metrics-pill,
+#custom-disk.metrics-pill,
+#network.metrics-pill,
+#custom-net.metrics-pill,
+#backlight.metrics-pill,
+#keyboard-state.metrics-pill {
+  background: rgba(214, 93, 14, 0.50);   /* muted clay */
+  border: 1px solid rgba(214, 93, 14, 0.70);
+  color: @text;
+}
+
+/* Settings drawer: unify child pills */
+#custom-vpn.settings-pill,
+#custom-vpn.on.settings-pill,
+#custom-vpn.off.settings-pill,
+#custom-bluetooth.settings-pill,
+#custom-bluetooth.off.settings-pill,
+#custom-notifications.settings-pill,
+#custom-sysmon.settings-pill,
+#idle_inhibitor.settings-pill,
+#power-profiles-daemon.settings-pill,
+.settings-pill #custom-vpn,
+.settings-pill #custom-bluetooth,
+.settings-pill #custom-notifications,
+.settings-pill #custom-sysmon,
+.settings-pill #idle_inhibitor,
+.settings-pill #power-profiles-daemon {
+  background: rgba(69, 133, 136, 0.45);   /* muted sky */
+  border: 1px solid rgba(69, 133, 136, 0.70);
+  color: @text;
+}
+
+#temperature.critical {
+  background: rgba(204, 36, 29, 0.80);
+  border: 1px solid rgba(204, 36, 29, 1);
+  color: @text;
+}
+
+/* ===== Battery ===== */
+#battery {
+  background: rgba(80, 73, 69, 0.65);
+  border: 1px solid rgba(80, 73, 69, 0.90);
+  color: @text;
+}
+
+#battery.charging,
+#battery.plugged {
+  background: rgba(104, 157, 106, 0.85);   /* moss */
+  border: 1px solid rgba(104, 157, 106, 1);
+  color: rgba(29, 32, 33, 0.98);
+}
+
+#battery.critical:not(.charging) {
+  background: rgba(204, 36, 29, 0.85);
+  border: 1px solid rgba(204, 36, 29, 1);
+  color: @text;
+}
+
+/* ===== Clock ===== */
+#clock,
+#clock-time {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  color: @text;
+  font-weight: 700;
+  font-family: "JetBrains Mono", "Font Awesome 6 Free", "Font Awesome 6 Brands", monospace;
+  padding: 2px 10px;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.60), 0 0 10px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+}
+
+/* ===== Tray ===== */
+#tray {
+  background: rgba(60, 56, 54, 0.82);
+  border: 1px solid rgba(102, 92, 84, 0.30);
+  border-right: none;
+  border-radius: 16px 0 0 16px;
+  padding: 5px 8px;
+  margin: 6px 0 6px 6px;
+  min-height: 0;
+  background-image:
+    radial-gradient(circle at left center, rgba(235, 219, 178, 0.45) 0%, rgba(235, 219, 178, 0.45) 40%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 100%);
+  background-repeat: no-repeat;
+  background-size: 6px 6px;
+}
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention {
+  background: rgba(204, 36, 29, 0.70);
+  border-radius: 999px;
+}
+
+
+/* ===== Power ===== */
+#custom-power {
+  font-weight: 800;
+  background: rgba(204, 36, 29, 0.60);
+  border: 1px solid rgba(204, 36, 29, 0.85);
+  font-size: 18px;
+  min-width: 32px;
+  padding: 0 12px;
+}
+#custom-power:hover {
+  background: rgba(204, 36, 29, 0.75);
+  border: 1px solid rgba(204, 36, 29, 0.98);
+}
+
+/* ===== Taskbar as “tabs” ===== */
+#taskbar {
+  background: rgba(60, 56, 54, 0.82);
+  border: 1px solid rgba(102, 92, 84, 0.30);
+  border-left: none;
+  border-radius: 0 16px 16px 0;
+  padding: 5px 8px;
+  margin: 6px 6px 6px 0;
+  background-image:
+    radial-gradient(circle at left center, rgba(235, 219, 178, 0.45) 0%, rgba(235, 219, 178, 0.45) 40%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 100%);
+  background-repeat: no-repeat;
+  background-size: 6px 6px;
+}
+
+#taskbar button {
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 16px;
+  background: rgba(235, 219, 178, 0.16);
+  border: 1px solid rgba(235, 219, 178, 0.20);
+  color: rgba(235, 219, 178, 0.92);
+}
+
+#taskbar button.active {
+  background: rgba(69, 133, 136, 0.72); /* sky */
+  border: 1px solid rgba(69, 133, 136, 0.98);
+  color: rgba(29, 32, 33, 0.98);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+#taskbar button.minimized {
+  background: rgba(235, 219, 178, 0.12);
+  border: 1px solid rgba(235, 219, 178, 0.16);
+  color: rgba(235, 219, 178, 0.70);
+}
+
+/* ===== Edge spacing ===== */
+.modules-left > widget:first-child { margin-left: 48px; }
+.modules-right > widget:last-child { margin-right: 48px; }
+
+/* Right side: slightly more opaque for dark wallpapers */
+.modules-right .module {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0.26));
+}
