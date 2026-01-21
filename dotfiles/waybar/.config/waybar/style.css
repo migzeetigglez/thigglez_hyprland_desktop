@@ -72,12 +72,6 @@ button:hover {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
 }
 
-/* Window title: quieter */
-#window {
-  background: @surface2;
-  color: @textDim;
-}
-
 /* ===== Apps button ===== */
 #custom-appmenu {
   font-weight: 700;

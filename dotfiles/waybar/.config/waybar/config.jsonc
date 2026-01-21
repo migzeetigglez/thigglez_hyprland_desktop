@@ -18,7 +18,6 @@
         "hyprland/workspaces"
     ],
     "modules-right": [
-        "hyprland/window",
         "custom/default-sink",
         "group/capture",
         "group/audio",
@@ -39,12 +38,6 @@
         "persistent-workspaces": {
             "*": 1
         }
-    },
-
-    "hyprland/window": {
-        "expand": true,
-        "justify": "left",
-        "align": 0
     },
 
     "tray": {
