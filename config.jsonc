@@ -161,7 +161,7 @@
     "custom/network-manager": {
         "format": "",
         "tooltip": false,
-        "on-click": "$HOME/.config/waybar/scripts/toggle_window.sh kcm_networkmanagement env QT_SCALE_FACTOR=1.3 kcmshell6 kcm_networkmanagement"
+        "on-click": "$HOME/.config/waybar/scripts/toggle_window.sh nmtui kitty --class nmtui --override font_size=18 -e nmtui"
     },
     "custom/notifications": {
         "format": "",
