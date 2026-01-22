@@ -44,6 +44,11 @@ Terminal: Kitty paired with Fish shell prompt styling and matching theme.
 - brightnessctl (optional; Omarchy resume)
 - pavucontrol
 - blueman
+- plasma-nm (KDE NetworkManager KCM via kcmshell6)
+- plasma-systemmonitor
+- upower + gnome-power-statistics
+- btop
+- pacman-contrib (checkupdates)
 - fish, zsh, bash
 - kitty
 - neofetch
@@ -110,6 +115,8 @@ The bootstrap script installs these (where available):
 - playerctl, pipewire, wireplumber, wl-clipboard
 - grim, slurp, wf-recorder, ImageMagick
 - swaync, hyprpaper, pavucontrol, blueman
+- plasma-nm, plasma-systemmonitor
+- upower, gnome-power-statistics, btop, pacman-contrib
 - fish, zsh, bash, kitty
 - neofetch, starship
 - ttf-jetbrains-mono, ttf-font-awesome (or distro equivalents)

@@ -87,7 +87,7 @@
             "default": ["", "", ""]
         },
         "tooltip": false,
-        "on-click": "pavucontrol"
+        "on-click": "$HOME/.config/waybar/scripts/toggle_window.sh org.pulseaudio.pavucontrol pavucontrol"
     },
 
     "pulseaudio/slider": {
@@ -148,6 +148,7 @@
         "modules": [
             "custom/settings",
             "custom/vpn",
+            "custom/network-manager",
             "custom/bluetooth",
             "custom/peripheral-battery",
             "custom/sysmon"
@@ -157,6 +158,11 @@
         "format": "",
         "tooltip": false
     },
+    "custom/network-manager": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "$HOME/.config/waybar/scripts/toggle_window.sh kcm_networkmanagement env QT_SCALE_FACTOR=1.3 kcmshell6 kcm_networkmanagement"
+    },
     "custom/notifications": {
         "format": "",
         "tooltip": false,
@@ -165,7 +171,7 @@
     "custom/sysmon": {
         "format": "",
         "tooltip": false,
-        "on-click": "kitty --class btop --override remember_window_size=no --override initial_window_width=80c --override initial_window_height=30c -e btop"
+        "on-click": "$HOME/.config/waybar/scripts/toggle_window.sh btop kitty --class btop --override remember_window_size=no --override initial_window_width=104c --override initial_window_height=30c -e btop"
     },
 
     "custom/spotify": {
@@ -186,7 +192,7 @@
         "interval": 600,
         "exec": "$HOME/.config/waybar/scripts/updates.sh",
         "hide-empty-text": true,
-        "on-click": "kitty --class updates-list -e bash -lc 'if command -v checkupdates >/dev/null 2>&1; then checkupdates; else pacman -Qu; fi; echo; read -n1 -rsp \"Press any key to close\"'"
+        "on-click": "$HOME/.config/waybar/scripts/updates_click.sh"
     },
 
     "custom/vpn": {
@@ -220,13 +226,13 @@
         "exec": "$HOME/.config/waybar/scripts/peripheral_battery.py",
         "hide-empty-text": true,
         "format": "󰁹 {}",
-        "on-click": "gnome-power-statistics"
+        "on-click": "$HOME/.config/waybar/scripts/toggle_window.sh org.gnome.PowerStats gnome-power-statistics"
     },
     "custom/bluetooth": {
         "return-type": "json",
         "interval": 5,
         "exec": "$HOME/.config/waybar/scripts/bluetooth.sh",
-        "on-click": "blueman-manager"
+        "on-click": "$HOME/.config/waybar/scripts/toggle_window.sh blueman-manager blueman-manager"
     },
     "custom/screenrecord": {
         "return-type": "json",
