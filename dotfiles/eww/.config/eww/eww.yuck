@@ -23,7 +23,7 @@
 
 (defwindow calendar_popup
   :monitor 0
-  :geometry (geometry :x "10px" :y "40px" :width "360px" :height "320px" :anchor "top left")
+  :geometry (geometry :x "10px" :y "40px" :width "460px" :height "400px" :anchor "top left")
   :stacking "fg"
   :focusable false
   :exclusive false
@@ -36,10 +36,10 @@
       :onclick "~/.config/eww/scripts/open_calendar.sh {2}-{1}-{0}")))
 
 (defwidget media_controls []
-  (box :class "media-controls" :visible {media?.player ?: "" != ""} :orientation "horizontal" :space-evenly false
-    (button :class "media-btn" :active {media?.player ?: "" != ""} :onclick "playerctl --player=${media?.player ?: ""} play-pause" "Play/Pause")
-    (button :class "media-btn" :active {media?.player ?: "" != ""} :onclick "playerctl --player=${media?.player ?: ""} previous" "Prev")
-    (button :class "media-btn" :active {media?.player ?: "" != ""} :onclick "playerctl --player=${media?.player ?: ""} next" "Next")))
+  (box :class "media-controls" :visible {(media?.player ?: "") != ""} :orientation "horizontal" :space-evenly false
+    (button :class "media-btn" :active {(media?.player ?: "") != ""} :onclick "playerctl --player=${media?.player ?: ""} play-pause" "Play/Pause")
+    (button :class "media-btn" :active {(media?.player ?: "") != ""} :onclick "playerctl --player=${media?.player ?: ""} previous" "Prev")
+    (button :class "media-btn" :active {(media?.player ?: "") != ""} :onclick "playerctl --player=${media?.player ?: ""} next" "Next")))
 
 (defwidget notif_header []
   (box :class "notif-header" :orientation "horizontal" :space-evenly false
@@ -60,10 +60,12 @@
         (label :class "notif-app" :text app :xalign 0)))
     (button :class "notif-dismiss" :onclick "~/.config/eww/scripts/notifications_dismiss.py ${id}" :halign "end" :valign "start" "x")))
 
+(defwidget settings_item [label command]
+  (button :class "settings-item" :onclick "~/.config/eww/scripts/settings_action.sh ${command}" label))
 
 (defwindow volume_osd
   :monitor 0
-  :geometry (geometry :x "0px" :y "20px" :width "360px" :height "72px" :anchor "top center")
+  :geometry (geometry :x "0px" :y "20px" :width "460px" :height "90px" :anchor "top center")
   :stacking "overlay"
   :focusable false
   :exclusive false
@@ -73,33 +75,41 @@
     (progress :class "osd-bar" :value {volume_percent})
     (label :class "osd-value" :text "${volume_percent}%")))
 
-
-  :stacking "overlay"
-  :focusable false
-  :exclusive false
-  :class "copy-osd-window"
-  (box :class "copy-osd ${copy_status}" :orientation "horizontal" :space-evenly false
-    (label :class "copy-osd-label" :text copy_message)))
-
 (defwindow media_popup
   :monitor 0
-  :geometry (geometry :x "10px" :y "40px" :width "420px" :height "170px" :anchor "top left")
+  :geometry (geometry :x "10px" :y "40px" :width "520px" :height "230px" :anchor "top left")
   :stacking "fg"
   :focusable false
   :exclusive false
   (box :class "popup-body" :orientation "vertical" :space-evenly false
     (popup_header :title "Now Playing" :subtitle time_str)
     (box :class "media-row" :orientation "horizontal" :space-evenly false
-      (image :class "media-art" :visible {media?.art_path ?: "" != ""} :path "${media?.art_path ?: ""}" :image-width 64 :image-height 64)
-      (box :class "media-text" :orientation "vertical" :space-evenly false
-        (label :class "media-title" :text "${media?.title ?: 'Nothing playing'}")
-        (label :class "media-artist" :text "${media?.artist ?: 'Unknown artist'}")
-        (label :class "media-album" :text "${media?.album ?: ''}")))
+      (image :class "media-art" :visible {(media?.art_path ?: "") != ""} :path "${media?.art_path ?: ""}" :image-width 64 :image-height 64)
+    (box :class "media-text" :orientation "vertical" :space-evenly false
+      (label :class "media-title" :text "${media?.title ?: 'Nothing playing'}")
+      (label :class "media-artist" :text "${media?.artist ?: 'Unknown artist'}")
+      (label :class "media-album" :text "${media?.album ?: ''}")))
     (media_controls)))
+
+(defwindow settings_panel
+  :monitor 0
+  :geometry (geometry :x "10px" :y "40px" :width "480px" :height "420px" :anchor "top right")
+  :stacking "overlay"
+  :focusable false
+  :exclusive false
+  (box :class "settings-panel" :orientation "vertical" :space-evenly false
+    (popup_header :title "Quick Settings" :subtitle time_str)
+    (box :class "settings-list" :orientation "vertical" :space-evenly false :spacing 8
+      (settings_item :label "Wi‑Fi (nmtui)" :command "kitty --class nmtui --override font_size=20 -e nmtui")
+      (settings_item :label "Bluetooth" :command "blueman-manager")
+      (settings_item :label "Audio" :command "pavucontrol")
+      (settings_item :label "Power Stats" :command "gnome-power-statistics")
+      (settings_item :label "System Monitor" :command "kitty --class btop --override remember_window_size=no --override initial_window_width=104c --override initial_window_height=30c -e btop")
+      )))
 
 (defwindow notifications_panel
   :monitor 0
-  :geometry (geometry :x "10px" :y "40px" :width "360px" :height "80%" :anchor "top right")
+  :geometry (geometry :x "10px" :y "40px" :width "480px" :height "90%" :anchor "top right")
   :stacking "overlay"
   :focusable false
   :exclusive false

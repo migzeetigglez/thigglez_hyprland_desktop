@@ -52,7 +52,7 @@
     "clock#time": {
         // "timezone": "America/New_York",
         "tooltip": false,
-        "on-click": "/usr/bin/python3 /home/thigglez/.config/eww/scripts/open_popup_at_cursor.py calendar_popup 360 42 primary",
+        "on-click": "/usr/bin/python3 /home/thigglez/.config/eww/scripts/open_popup_at_cursor.py calendar_popup 460 42 primary",
         "format": "{:%I:%M %p}"
     },
 
@@ -60,7 +60,9 @@
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
         "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip": false,
+        "tooltip": true,
+        "tooltip-format-wifi": "SSID: {essid}\nSignal: {signalStrength}%\nIP: {ipaddr}",
+        "tooltip-format-ethernet": "IP: {ipaddr}/{cidr}",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
@@ -148,7 +150,6 @@
         "modules": [
             "custom/settings",
             "custom/vpn",
-            "custom/network-manager",
             "custom/bluetooth",
             "custom/peripheral-battery",
             "custom/sysmon"
@@ -156,12 +157,13 @@
     },
     "custom/settings": {
         "format": "",
-        "tooltip": false
+        "tooltip": false,
+        "on-click": "/usr/bin/python3 /home/thigglez/.config/eww/scripts/open_popup_at_cursor.py settings_panel 480 42"
     },
     "custom/network-manager": {
         "format": "",
         "tooltip": false,
-        "on-click": "$HOME/.config/waybar/scripts/toggle_window.sh nmtui kitty --class nmtui --override font_size=18 -e nmtui"
+        "on-click": "$HOME/.config/waybar/scripts/toggle_window.sh nmtui kitty --class nmtui --override font_size=20 -e nmtui"
     },
     "custom/notifications": {
         "format": "",
@@ -182,7 +184,7 @@
         "hide-empty-text": true,
         "escape": true,
         "tooltip": false,
-        "on-click": "/usr/bin/python3 /home/thigglez/.config/eww/scripts/open_popup_at_cursor.py media_popup 420 42 primary",
+        "on-click": "/usr/bin/python3 /home/thigglez/.config/eww/scripts/open_popup_at_cursor.py media_popup 520 42 primary",
         "on-click-right": "playerctl next",
         "on-click-middle": "playerctl previous"
     },

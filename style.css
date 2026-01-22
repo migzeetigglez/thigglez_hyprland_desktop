@@ -417,6 +417,7 @@ button:hover {
 #memory.metrics-pill,
 #temperature.metrics-pill,
 #custom-disk.metrics-pill,
+#custom-network-manager.metrics-pill,
 #network.metrics-pill,
 #custom-net.metrics-pill {
   background: rgba(214, 93, 14, 0.50);   /* muted clay */
@@ -428,14 +429,12 @@ button:hover {
 #custom-vpn.settings-pill,
 #custom-vpn.on.settings-pill,
 #custom-vpn.off.settings-pill,
-#custom-network-manager.settings-pill,
 #custom-bluetooth.settings-pill,
 #custom-bluetooth.off.settings-pill,
 #custom-notifications.settings-pill,
 #custom-peripheral-battery.settings-pill,
 #custom-sysmon.settings-pill,
 .settings-pill #custom-vpn,
-.settings-pill #custom-network-manager,
 .settings-pill #custom-bluetooth,
 .settings-pill #custom-notifications,
 .settings-pill #custom-sysmon,

@@ -15,6 +15,21 @@ fi
 # Exit early if screensave is already running
 pgrep -f org.omarchy.screensaver && exit 0
 
+# Don't start if any app is fullscreen.
+if command -v jq &>/dev/null; then
+  fullscreen_count="$(hyprctl -j clients | jq '[.[] | select(.fullscreen == 1)] | length' 2>/dev/null || echo 0)"
+  if [[ "${fullscreen_count:-0}" != "0" ]]; then
+    exit 0
+  fi
+fi
+
+# Don't start if media is playing.
+if command -v playerctl &>/dev/null; then
+  if playerctl --all-players status 2>/dev/null | grep -q "^Playing$"; then
+    exit 0
+  fi
+fi
+
 # Allow screensaver to be turned off but also force started
 if [[ -f ~/.local/state/omarchy/toggles/screensaver-off ]] && [[ $1 != "force" ]]; then
   exit 1
