@@ -101,6 +101,7 @@
     (popup_header :title "Quick Settings" :subtitle time_str)
     (box :class "settings-list" :orientation "vertical" :space-evenly false :spacing 8
       (settings_item :label "Wi‑Fi (nmtui)" :command "kitty --class nmtui --override font_size=20 -e nmtui")
+      (settings_item :label "VPN (Mullvad)" :command "~/.config/waybar/scripts/mullvad_toggle.sh")
       (settings_item :label "Bluetooth" :command "blueman-manager")
       (settings_item :label "Audio" :command "pavucontrol")
       (settings_item :label "Power Stats" :command "gnome-power-statistics")
