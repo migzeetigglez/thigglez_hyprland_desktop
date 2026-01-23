@@ -173,7 +173,7 @@
     "custom/sysmon": {
         "format": "",
         "tooltip": false,
-        "on-click": "$HOME/.config/waybar/scripts/toggle_window.sh btop kitty --class btop --override remember_window_size=no --override initial_window_width=104c --override initial_window_height=30c -e btop"
+        "on-click": "$HOME/.config/waybar/scripts/toggle_window.sh btop kitty --class btop --override font_size=18 --override remember_window_size=no --override initial_window_width=80c --override initial_window_height=24c -e btop"
     },
 
     "custom/spotify": {
